@@ -50,7 +50,8 @@ const PostsContextProvider = (props) => {
 
   // Add post
   const addPost = (post) => {
-    db.collection('posts').add(post);
+    db.collection('posts').add(post)
+      .then(console.log('post added...'))
   }
 
 
@@ -81,6 +82,7 @@ const PostsContextProvider = (props) => {
 
   // Filter posts
   const filterPosts = (filter) => {
+    console.log(filter)
     dispatch({ type: FILTER_POSTS, payload: filter })
   }
   // Clear filter
@@ -96,6 +98,7 @@ const PostsContextProvider = (props) => {
       posts: state.posts,
       current: state.current,
       userPosts: state.userPosts,
+      filtered: state.filtered,
       // getPosts,
       addPost,
       deletePost,
