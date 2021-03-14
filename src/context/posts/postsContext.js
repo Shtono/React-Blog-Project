@@ -29,10 +29,10 @@ const PostsContextProvider = (props) => {
 
   // Get current user posts 
   useEffect(() => {
-    if (state.posts) {
+    if (state.posts && currentUser) {
       dispatch({ type: GET_CURRENT_USER_POSTS, payload: currentUser.uid })
     }
-  }, [state.posts])
+  }, [currentUser, state.posts])
 
   // Get posts / real time update
   useEffect(() => {
