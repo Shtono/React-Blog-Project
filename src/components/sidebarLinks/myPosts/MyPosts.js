@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import BlogPost from "../../blogPost/BlogPost";
-import PostsContext from '../../../context/posts/postsContext';
+import { PostsContext } from '../../../context/posts/PostsContext';
 
 
 const MyPosts = () => {

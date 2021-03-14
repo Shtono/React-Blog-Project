@@ -1,7 +1,7 @@
 import '../../styles/addPost.css'
 import { useState, useContext } from 'react';
 import { timestamp } from '../../firebase';
-import PostsContext from '../../context/posts/postsContext';
+import { PostsContext } from '../../context/posts/PostsContext';
 import { AuthContext } from '../../context/auth/AuthContext';
 
 const AddPost = () => {

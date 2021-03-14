@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PostsContext from '../../context/posts/postsContext';
+import { PostsContext } from '../../context/posts/PostsContext';
 
 const FilterPosts = () => {
   const { filterPosts, clearFilter } = useContext(PostsContext);

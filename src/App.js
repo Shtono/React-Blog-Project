@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/layout/Navbar";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PostsState from "./context/posts/PostsState";
+import PostsContextProvider from "./context/posts/PostsContext";
 import Blog from "./pages/Blog";
 import UsersContextProvider from './context/users/UsersContext'
 import PrivateRoute from './components/privateRoutes/PrivateRoute';
@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <AuthContextProvider>
-        <PostsState>
+        <PostsContextProvider>
           <div className="App">
             <Navbar />
             <div className="content">
@@ -38,7 +38,7 @@ function App() {
             </div>
             <Footer />
           </div>
-        </PostsState>
+        </PostsContextProvider>
       </AuthContextProvider>
     </Router>
   );

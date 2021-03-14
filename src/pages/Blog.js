@@ -1,6 +1,6 @@
 import '../styles/blog.css'
 import { useContext } from 'react';
-import PostsContext from '../context/posts/postsContext';
+import { PostsContext } from '../context/posts/PostsContext';
 import BlogPost from '../components/blogPost/BlogPost';
 import FilterPosts from '../components/blogPost/FilterPosts';
 import UpdatePost from '../components/blogPost/UpdatePost';
