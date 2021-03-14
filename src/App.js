@@ -12,7 +12,7 @@ import PrivateRoute from './components/privateRoutes/PrivateRoute';
 import SinglePost from "./components/blogPost/SinglePost";
 import AuthContextProvider from './context/auth/AuthContext'
 import Sidebar from './components/layout/sidebar/Sidebar';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './components/sidebarLinks/Dashboard';
 
 function App() {
 

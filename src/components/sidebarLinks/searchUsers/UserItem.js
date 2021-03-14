@@ -1,8 +1,4 @@
-
 export default function UserItem({ name }) {
-
-
-
   return (
     <div style={style}>
       <h3>{name}</h3>
