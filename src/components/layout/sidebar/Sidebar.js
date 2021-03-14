@@ -11,7 +11,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul>
         <Link to="/user/myprofile">My Profile</Link>
-        <Link to="/user/messages">Messages</Link>
+        <Link to="/user/chatrooms">Chat Rooms</Link>
         <Link to="/user/searchUsers">Find User</Link>
         <Link to="/user/createPost">Create Post</Link>
         <Link to="/user/myPosts">My Posts</Link>
