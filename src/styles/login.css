@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+  --pageFont: 'Ubuntu', sans-serif;
+}
+
+.login {
+  font-family: var(--pageFont);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 4/6;
+}
+
+.login form {
+  width: 100%;
+  height: 100%;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+}
+
+.login form h1 {
+  margin-bottom: 25px;
+}
+
+.login form .input {
+ margin-bottom: 15px;
+ padding: 10px 7px;
+ width: 100%;
+ background-color: rgba(255, 255, 255, 0.35);
+ border-radius: 10px;
+ position: relative;
+ z-index: 0;
+}
+
+
+.login form .input i {
+ color: #000;
+ position: absolute;
+ top: 7px;
+ bottom: 7px;
+}
+
+.login form input {
+  margin-left: 7px;
+  padding: 0 27px;
+  width:100%;
+  font-size: 1.7em;
+  font-weight: bolder;
+  outline: none;
+  border: none;
+  text-align: center;
+  background-color: transparent;
+  color: #fff;
+}
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;;
+  -webkit-text-fill-color: #fff;
+}
+.login form input::placeholder {
+  color: rgba(255, 255, 255, 0.425);
+}
+
+.login p:first-of-type {
+  align-self: flex-start;
+}
+.login p:first-of-type a {
+  color: #fff;
+}
+
+.login button {
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+  font-weight: bolder;
+  padding: 10px 0;
+  background-color: rgb(255, 94, 0);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+}
+.login button:active {
+ transform: scale(0.9);
+ transition: transform 0.2s ease;
+}
+
+.login p:nth-of-type(2) {
+  align-self: flex-start;
+}
+
+.alt-login {
+ margin: 25px 0;
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+}
+
+.alt-login a {
+  color: #fff;
+  width: 49%;
+  text-align: center;
+  font-size: 1.3em;
+  padding: 1em 1em;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 10px;
+}
+.alt-login a:first-of-type {
+background-color: #4267B2;
+}
+.alt-login a:last-of-type {
+background-color: #E1306C;
+}
+
+.login form p:last-of-type :first-child {
+  color: #6c9dff;
+}
+
+@media screen and (min-width: 500px) {
+  .login {
+    margin: auto;
+    max-width: 500px;
+  }
+  .login form {
+    background: rgba(0,0,0,0.1);
+    padding: 75px 37.5px;
+    box-shadow: 15px 15px 10px rgb(0, 0, 0);
+  }
+}
+
+@media screen and (min-width:700px) {
+ 
+} 

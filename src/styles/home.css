@@ -1,0 +1,48 @@
+.dashboard {
+  background-color: rgba(255, 252, 252, 0.034);
+  box-shadow: black 10px 10px 10px;
+  width: 500px;
+  margin: 50px auto 75px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  grid-column: 3/8;
+  
+}
+
+.dashboard h1 {
+  font-size: 50px;
+}
+.dashboard h2 {
+  font-size: 35px;
+}
+.dashboard h3 {
+  margin-top: 25px;
+  font-size: 30px;
+}
+.dashboard button {
+  margin-top: 25px;
+  margin-left: 25px;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 7px;
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: rgba(255, 0, 0, 0.452);
+  outline: none;
+  box-shadow: black 2px 2px 5px;
+  text-shadow: black 3px 3px 2px;
+  border: rgba(255, 0, 0, 0) solid 2px;
+}
+
+.btn-green {
+  background-color: rgba(136, 255, 0, 0.527)!important;
+  
+}
+
+.btn-blue {
+  background-color: rgb(76, 0, 255)!important ;
+}

@@ -1,0 +1,101 @@
+.signup {
+  margin-top: 25px;
+  font-family: var(--pageFont);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 4/6;
+}
+
+.signup form {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signup h1 {
+margin-bottom: 25px;
+}
+
+.signup form input,
+.signup form button {
+  width: 100%;
+}
+
+.signup form label {
+align-self: flex-start;
+margin-bottom: 3px;
+}
+.signup form input {
+  margin-bottom: 15px;
+ padding: 12px 27px;
+ font-size: 1.3em;
+ font-weight: bolder;
+ outline: none;
+ border: none;
+ border-radius: 10px;
+ text-align: center;
+ background-color: rgba(255, 255, 255, 0.35);
+ color: #fff;
+}
+.signup form input::placeholder {
+  color: rgba(255, 255, 255, 0.425);
+}
+.signup button {
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+  font-weight: bolder;
+  padding: 10px 0;
+  background-color: rgb(255, 94, 0);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+
+}
+
+.signup form .incorrect {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.signup form .correct {
+background-color: rgba(0, 255, 0, 0.5);;
+}
+
+.signup .done {
+  padding: 15px;
+}
+.signup .done h1,h2 {
+  text-align: center;
+}
+.signup .done h2 {
+  text-align: center;
+  line-height: 1.7em;
+}
+
+.signup a {
+  color: inherit;
+}
+
+
+@media screen and (min-width:500px) {
+  .signup {
+    margin: auto;
+    max-width: 500px;
+  }
+
+  .signup form {
+    background: rgba(0,0,0,0.1);
+    padding: 75px 75px;
+    box-shadow: 15px 15px 10px rgb(0, 0, 0);
+  }
+} 
+
+@media screen and (min-width:768px) {
+  .signup {
+    width: 700px;
+  }
+}
