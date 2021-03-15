@@ -12,7 +12,10 @@ import PrivateRoute from './components/privateRoutes/PrivateRoute';
 import SinglePost from "./components/blogPost/singlePost/SinglePost";
 import AuthContextProvider from './context/auth/AuthContext'
 import Sidebar from './components/layout/sidebar/Sidebar';
-import Dashboard from './components/sidebarLinks/Dashboard';
+import MyProfile from './components/sidebarLinks/myprofile/MyProfile';
+import SeachUsers from './components/sidebarLinks/searchUsers/SearchUsers';
+import AddPost from './components/blogPost/AddPost';
+import MyPosts from './components/sidebarLinks/myPosts/MyPosts';
 
 function App() {
 
@@ -30,7 +33,13 @@ function App() {
                   <PrivateRoute exact path='/' component={Home} />
                   <PrivateRoute exatc path='/blog' component={Blog} />
                   <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
-                  <PrivateRoute path='/user' component={Dashboard} />
+
+                  <PrivateRoute exact path="/myprofile" component={MyProfile} />
+                  <PrivateRoute exact path="/searchUsers" component={SeachUsers} />
+                  <PrivateRoute exact path="/createPost" component={AddPost} />
+                  <PrivateRoute exact path="/myPosts" component={MyPosts} />
+                  {/* <PrivateRoute exact path="/chatrooms" component={ChatRooms} /> */}
+
                   <Route path='/login' component={Login} />
                   <Route path='/signup' component={Signup} />
                 </UsersContextProvider>

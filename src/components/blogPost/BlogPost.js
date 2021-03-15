@@ -15,6 +15,7 @@ const BlogPost = ({ userId, title, body, postId, post, deletePost, setCurrent })
         <Link to={`/posts/${post.id}`}>Read More..</Link>
         <button className="btn-post btn-delete" onClick={handleDelete}>Delete</button>
         <button className="btn-post btn-update" onClick={handleCurrent}>Update</button>
+        <p></p>
       </div>
     </div>
   );
