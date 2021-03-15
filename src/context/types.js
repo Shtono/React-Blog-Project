@@ -4,6 +4,9 @@ export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const FILTER_POSTS = 'FILTER_POSTS';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
+export const GET_SINGLE_POST = 'GET_SINGLE_POST';
+export const GET_POST_COMMENTS = 'GET_POST_COMMENTS';
+export const POST_CLEANUP = 'POST_CLEANUP';
 
 // USERS CONTEXT
 export const GET_USERS = 'GET_USERS';
@@ -12,3 +15,4 @@ export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';
 export const FILTER_USERS = 'FILTER_USERS';
 export const GET_CURRENT_USER_POSTS = 'GET_CURRENT_USER_POSTS';
+

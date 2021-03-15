@@ -9,7 +9,7 @@ import PostsContextProvider from "./context/posts/PostsContext";
 import Blog from "./pages/Blog";
 import UsersContextProvider from './context/users/UsersContext'
 import PrivateRoute from './components/privateRoutes/PrivateRoute';
-import SinglePost from "./components/blogPost/SinglePost";
+import SinglePost from "./components/blogPost/singlePost/SinglePost";
 import AuthContextProvider from './context/auth/AuthContext'
 import Sidebar from './components/layout/sidebar/Sidebar';
 import Dashboard from './components/sidebarLinks/Dashboard';

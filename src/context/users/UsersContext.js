@@ -58,7 +58,6 @@ const UsersContextProvider = (props) => {
   const getUserInfo = (id) => {
     db.collection('users').doc(id).get().then(doc => {
       dispatch({ type: GET_CURRENT_USER, payload: doc.data() });
-      console.log('userInfo ran')
     }).catch(err => console.log(err.message))
   }
 

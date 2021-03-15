@@ -1,4 +1,14 @@
-import { CLEAR_CURRENT, GET_POSTS, SET_CURRENT, FILTER_POSTS, CLEAR_FILTER, GET_CURRENT_USER_POSTS } from "../types"
+import {
+  CLEAR_CURRENT,
+  GET_POSTS,
+  SET_CURRENT,
+  FILTER_POSTS,
+  CLEAR_FILTER,
+  GET_CURRENT_USER_POSTS,
+  GET_SINGLE_POST,
+  GET_POST_COMMENTS,
+  POST_CLEANUP
+} from "../types"
 
 export default (state, action) => {
   switch (action.type) {
@@ -11,6 +21,22 @@ export default (state, action) => {
       return {
         ...state,
         userPosts: state.posts.filter(post => post.uid === action.payload)
+      }
+    case GET_SINGLE_POST:
+      return {
+        ...state,
+        singlePost: action.payload
+      }
+    case GET_POST_COMMENTS:
+      return {
+        ...state,
+        postComments: action.payload
+      }
+    case POST_CLEANUP:
+      return {
+        ...state,
+        singlePost: null,
+        postComments: null
       }
     case FILTER_POSTS:
       return {

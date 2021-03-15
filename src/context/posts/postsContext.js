@@ -8,7 +8,10 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   FILTER_POSTS,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  GET_SINGLE_POST,
+  GET_POST_COMMENTS,
+  POST_CLEANUP
 } from '../types';
 
 
@@ -22,6 +25,8 @@ const PostsContextProvider = (props) => {
     current: null,
     filtered: null,
     userPosts: null,
+    singlePost: null,
+    postComments: null,
     error: null
   }
 
@@ -90,6 +95,37 @@ const PostsContextProvider = (props) => {
     dispatch({ type: CLEAR_FILTER })
   }
 
+  // Get SinglePost
+  const getSinglePost = (id) => {
+    db.collection('posts')
+      .doc(id)
+      .get()
+      .then(doc => dispatch({ type: GET_SINGLE_POST, payload: doc.data() }))
+      .catch(err => console.log(err.message))
+  }
+  // Get Post Comments
+  const getPostComments = (id) => {
+    const unsubscribe = db.collection('comments')
+      .where("postId", "==", id)
+      .orderBy("createdAt", "desc")
+      .onSnapshot(snapshot => {
+        let arr = snapshot.docs.map(doc => doc.data())
+        dispatch({ type: GET_POST_COMMENTS, payload: arr })
+      })
+    return unsubscribe;
+  }
+
+  // Add Comment
+  const addComment = (comment) => {
+    db.collection('comments').add(comment)
+      .then(() => console.log('Comment added...'))
+      .catch(err => console.log(err))
+  }
+
+  // Single post cleanup
+  const singlePostCleanup = () => {
+    dispatch({ type: POST_CLEANUP })
+  }
 
 
 
@@ -99,14 +135,19 @@ const PostsContextProvider = (props) => {
       current: state.current,
       userPosts: state.userPosts,
       filtered: state.filtered,
-      // getPosts,
+      singlePost: state.singlePost,
+      postComments: state.postComments,
       addPost,
       deletePost,
       filterPosts,
       clearFilter,
       updatePost,
       setCurrent,
-      clearCurrent
+      clearCurrent,
+      getSinglePost,
+      getPostComments,
+      addComment,
+      singlePostCleanup
     }}>
       {props.children}
     </PostsContext.Provider>
