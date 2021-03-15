@@ -31,7 +31,7 @@ function App() {
               <Switch>
                 <UsersContextProvider>
                   <PrivateRoute exact path='/' component={Home} />
-                  <PrivateRoute exatc path='/blog' component={Blog} />
+                  <PrivateRoute exact path='/blog' component={Blog} />
                   <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
 
                   <PrivateRoute exact path="/myprofile" component={MyProfile} />
