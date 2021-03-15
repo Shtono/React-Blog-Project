@@ -21,6 +21,7 @@ const SinglePost = (props) => {
     (singlePost && postComments) ?
       <div className="single-post">
         <Post title={singlePost.title} author={singlePost.author} body={singlePost.body} />
+        <p>{postComments.length} comments</p>
         <AddComment postId={postId} addComment={addComment} postedBy={currentUser.displayName} />
         {postComments && <Comments comments={postComments} />}
       </div>

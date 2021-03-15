@@ -21,7 +21,8 @@ export default function AuthContextProvider(props) {
       await auth.createUserWithEmailAndPassword(email, password)
       await auth.currentUser.updateProfile({ displayName: username })
       await db.collection('users').doc(auth.currentUser.uid).set({
-        username: auth.currentUser.displayName
+        username: auth.currentUser.displayName,
+        isActive: true
       }
       )
       setSignUpCompleted(true);
@@ -36,13 +37,17 @@ export default function AuthContextProvider(props) {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
-  const logout = () => {
-    auth.signOut()
+  const logout = async () => {
+    await db.collection('users').doc(auth.currentUser.uid).update({ isActive: false })
+    return auth.signOut()
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
+      if (user) {
+        db.collection('users').doc(auth.currentUser.uid).update({ isActive: true })
+      }
       setLoading(false);
     })
     return unsubscribe
