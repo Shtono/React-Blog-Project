@@ -1,12 +1,17 @@
 import '../styles/blog.css'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
 import BlogPost from '../components/blogPost/BlogPost';
 import FilterPosts from '../components/blogPost/FilterPosts';
 import UpdatePost from '../components/blogPost/UpdatePost';
 
 const Blog = () => {
-  const { posts, updatePost, deletePost, current, setCurrent, clearCurrent, filtered } = useContext(PostsContext);
+  const { realTimeListenerPosts, getPosts, posts, updatePost, deletePost, current, setCurrent, clearCurrent, filtered } = useContext(PostsContext);
+
+  useEffect(() => {
+    const unsubscribe = realTimeListenerPosts('posts', getPosts);
+    return unsubscribe;
+  }, [])
 
   return (
     <div className="blog-container">

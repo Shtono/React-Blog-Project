@@ -7,7 +7,8 @@ import {
   GET_CURRENT_USER_POSTS,
   GET_SINGLE_POST,
   GET_POST_COMMENTS,
-  POST_CLEANUP
+  SINGLE_POST_CLEANUP,
+  CLEAR_ALL_POSTS
 } from "../types"
 
 export default (state, action) => {
@@ -17,10 +18,16 @@ export default (state, action) => {
         ...state,
         posts: action.payload
       }
+    case CLEAR_ALL_POSTS:
+      return {
+        ...state,
+        posts: null,
+        userPosts: null
+      }
     case GET_CURRENT_USER_POSTS:
       return {
         ...state,
-        userPosts: state.posts.filter(post => post.uid === action.payload)
+        userPosts: action.payload
       }
     case GET_SINGLE_POST:
       return {
@@ -32,7 +39,7 @@ export default (state, action) => {
         ...state,
         postComments: action.payload
       }
-    case POST_CLEANUP:
+    case SINGLE_POST_CLEANUP:
       return {
         ...state,
         singlePost: null,

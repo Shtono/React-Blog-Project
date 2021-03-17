@@ -1,11 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import BlogPost from "../../blogPost/BlogPost";
 import { PostsContext } from '../../../context/posts/PostsContext';
 import UpdatePost from '../../blogPost/UpdatePost';
 
 
 const MyPosts = () => {
-  const { userPosts, deletePost, setCurrent, current, clearCurrent, updatePost } = useContext(PostsContext);
+  const { realTimeListenerUserPosts, userPosts, deletePost, setCurrent, current, clearCurrent, updatePost } = useContext(PostsContext);
+
+
+  useEffect(() => {
+    const unsubscribe = realTimeListenerUserPosts();
+    return unsubscribe;
+  })
+
   return (
     <div className="blog-container">
 
@@ -22,3 +29,8 @@ const MyPosts = () => {
 }
 
 export default MyPosts;
+
+
+// Order PostsContext
+
+// Start with ChatRooms class Component

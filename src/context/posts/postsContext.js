@@ -11,7 +11,8 @@ import {
   CLEAR_FILTER,
   GET_SINGLE_POST,
   GET_POST_COMMENTS,
-  POST_CLEANUP
+  SINGLE_POST_CLEANUP,
+  CLEAR_ALL_POSTS
 } from '../types';
 
 
@@ -32,26 +33,50 @@ const PostsContextProvider = (props) => {
 
   const [state, dispatch] = useReducer(postReducer, initialState);
 
-  // Get current user posts 
+  // Clear state on Logout
   useEffect(() => {
-    if (state.posts && currentUser) {
-      dispatch({ type: GET_CURRENT_USER_POSTS, payload: currentUser.uid })
+    if (!currentUser) {
+      dispatch({ type: CLEAR_ALL_POSTS })
     }
-  }, [currentUser, state.posts])
+  }, [currentUser])
 
-  // Get posts / real time update
-  useEffect(() => {
+  // Real time listener for current User posts
+  const realTimeListenerUserPosts = () => {
     const unsubscribe = db.collection('posts')
       .orderBy("date", "desc")
+      .where("uid", "==", currentUser.uid)
       .onSnapshot(snapshot => {
-        let arr = snapshot.docs.map(doc => {
+        let posts = snapshot.docs.map(doc => {
           return { ...doc.data(), id: doc.id }
         })
-        dispatch({ type: GET_POSTS, payload: arr })
+        dispatch({ type: GET_CURRENT_USER_POSTS, payload: posts })
       })
-    return unsubscribe
-    // eslint-disable-next-line
-  }, [])
+    return unsubscribe;
+  }
+
+  // Real time listener for All posts
+  const realTimeListenerPosts = (collection, callback) => {
+    const unsubscribe = db.collection(collection)
+      .orderBy("date", "desc")
+      .onSnapshot(snapshot => {
+        let posts = snapshot.docs.map(doc => {
+          return { ...doc.data(), id: doc.id }
+        })
+        callback(posts)
+      })
+    return unsubscribe;
+  }
+
+  // Get current user posts 
+  // const getCurrentUserPosts = (posts) => {
+  //   dispatch({ type: GET_CURRENT_USER_POSTS, payload: posts })
+  // }
+
+  // Get posts / real time update
+  const getPosts = (posts) => {
+    dispatch({ type: GET_POSTS, payload: posts })
+  }
+
 
   // Add post
   const addPost = (post) => {
@@ -87,7 +112,6 @@ const PostsContextProvider = (props) => {
 
   // Filter posts
   const filterPosts = (filter) => {
-    console.log(filter)
     dispatch({ type: FILTER_POSTS, payload: filter })
   }
   // Clear filter
@@ -103,16 +127,18 @@ const PostsContextProvider = (props) => {
       .then(doc => dispatch({ type: GET_SINGLE_POST, payload: doc.data() }))
       .catch(err => console.log(err.message))
   }
-  // Get Post Comments
+  // Get Post Comments / Real time listener
   const getPostComments = (id) => {
     const unsubscribe = db.collection('comments')
       .where("postId", "==", id)
       .orderBy("createdAt", "desc")
       .onSnapshot(snapshot => {
-        let arr = snapshot.docs.map(doc => doc.data())
+        let arr = snapshot.docs.map(doc => {
+          return { ...doc.data(), id: doc.id }
+        })
         dispatch({ type: GET_POST_COMMENTS, payload: arr })
       })
-    return unsubscribe;
+    return unsubscribe
   }
 
   // Add Comment
@@ -124,7 +150,7 @@ const PostsContextProvider = (props) => {
 
   // Single post cleanup
   const singlePostCleanup = () => {
-    dispatch({ type: POST_CLEANUP })
+    dispatch({ type: SINGLE_POST_CLEANUP })
   }
 
 
@@ -137,6 +163,7 @@ const PostsContextProvider = (props) => {
       filtered: state.filtered,
       singlePost: state.singlePost,
       postComments: state.postComments,
+      getPosts,
       addPost,
       deletePost,
       filterPosts,
@@ -147,7 +174,10 @@ const PostsContextProvider = (props) => {
       getSinglePost,
       getPostComments,
       addComment,
-      singlePostCleanup
+      singlePostCleanup,
+      realTimeListenerPosts,
+      // getCurrentUserPosts,
+      realTimeListenerUserPosts
     }}>
       {props.children}
     </PostsContext.Provider>

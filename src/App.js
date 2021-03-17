@@ -16,6 +16,7 @@ import MyProfile from './components/sidebarLinks/myprofile/MyProfile';
 import SeachUsers from './components/sidebarLinks/searchUsers/SearchUsers';
 import AddPost from './components/blogPost/AddPost';
 import MyPosts from './components/sidebarLinks/myPosts/MyPosts';
+import ChatRooms from './components/sidebarLinks/chatRooms/ChatRooms';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
                   <PrivateRoute exact path="/searchUsers" component={SeachUsers} />
                   <PrivateRoute exact path="/createPost" component={AddPost} />
                   <PrivateRoute exact path="/myPosts" component={MyPosts} />
-                  {/* <PrivateRoute exact path="/chatrooms" component={ChatRooms} /> */}
+                  <PrivateRoute exact path="/chatrooms" component={ChatRooms} />
 
                   <Route path='/login' component={Login} />
                   <Route path='/signup' component={Signup} />

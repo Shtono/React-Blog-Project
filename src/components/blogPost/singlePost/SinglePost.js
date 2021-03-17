@@ -10,10 +10,14 @@ const SinglePost = (props) => {
   const { currentUser } = useContext(AuthContext);
   const postId = props.match.params.blog_id;
 
+  useEffect(() => {
+    const unsubscribe = getPostComments(postId);
+    return unsubscribe;
+  }, [postId])
+
   // Get Post
   useEffect(() => {
     getSinglePost(postId)
-    getPostComments(postId)
     return singlePostCleanup
   }, [postId])
 
