@@ -25,23 +25,13 @@ const UsersContextProvider = (props) => {
 
   const [state, dispatch] = useReducer(usersReducer, initialState)
 
-  // Get users
-  useEffect(() => {
-    const unsubscribe = db.collection('users').onSnapshot(snapshot => {
-      let arr = snapshot.docs.map(doc => {
-        return { ...doc.data(), id: doc.id }
-      })
-      dispatch({ type: GET_USERS, payload: arr })
-    })
-    return unsubscribe;
-  }, [currentUser])
-
   useEffect(() => {
     if (currentUser) {
       getUserInfo(currentUser.uid)
     }
   }, [signUpCompleted])
 
+  // Get current user info when log in / Clear State when log out
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
@@ -53,6 +43,17 @@ const UsersContextProvider = (props) => {
     })
     return unsubscribe;
   }, [])
+
+  // Get users from DB / Real time listener 
+  const getUsers = () => {
+    const unsubscribe = db.collection('users').onSnapshot(snapshot => {
+      let arr = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      dispatch({ type: GET_USERS, payload: arr })
+    })
+    return unsubscribe;
+  }
 
   // Get current user info from DB
   const getUserInfo = (id) => {
@@ -66,9 +67,9 @@ const UsersContextProvider = (props) => {
     db.collection('users').doc(currentUser.uid).update(info)
       .then(console.log(`${currentUser.displayName}'s info was successfily updated`))
       .catch(err => console.log(err.message))
-    console.log('update called');
   }
 
+  // Filter users
   const filterUsers = (filter) => {
     dispatch({ type: FILTER_USERS, payload: filter })
   }
@@ -78,6 +79,7 @@ const UsersContextProvider = (props) => {
       users: state.users,
       currentUserInfo: state.currentUserInfo,
       filteredUsers: state.filteredUsers,
+      getUsers,
       updateUserInfo,
       filterUsers
     }}>

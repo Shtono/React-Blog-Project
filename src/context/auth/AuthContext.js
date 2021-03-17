@@ -4,12 +4,12 @@ import { auth, db } from '../../firebase';
 
 export const AuthContext = createContext();
 
+// Create custom Hook
 export const useAuth = () => {
   return useContext(AuthContext)
 }
 
-
-export default function AuthContextProvider(props) {
+const AuthContextProvider = (props) => {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
@@ -23,14 +23,12 @@ export default function AuthContextProvider(props) {
       await db.collection('users').doc(auth.currentUser.uid).set({
         username: auth.currentUser.displayName,
         isActive: true
-      }
-      )
+      })
       setSignUpCompleted(true);
       history.push('/')
     } catch (err) {
       console.log(err);
     }
-
   }
 
   const login = (email, password) => {
@@ -42,6 +40,7 @@ export default function AuthContextProvider(props) {
     return auth.signOut()
   }
 
+  // Authentication state listener
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
@@ -50,7 +49,7 @@ export default function AuthContextProvider(props) {
       }
       setLoading(false);
     })
-    return unsubscribe
+    return unsubscribe;
   }, [])
 
   return (
@@ -65,4 +64,6 @@ export default function AuthContextProvider(props) {
     </AuthContext.Provider>
   )
 }
+
+export default AuthContextProvider;
 

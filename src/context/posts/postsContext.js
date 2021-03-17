@@ -67,23 +67,16 @@ const PostsContextProvider = (props) => {
     return unsubscribe;
   }
 
-  // Get current user posts 
-  // const getCurrentUserPosts = (posts) => {
-  //   dispatch({ type: GET_CURRENT_USER_POSTS, payload: posts })
-  // }
-
   // Get posts / real time update
   const getPosts = (posts) => {
     dispatch({ type: GET_POSTS, payload: posts })
   }
-
 
   // Add post
   const addPost = (post) => {
     db.collection('posts').add(post)
       .then(console.log('post added...'))
   }
-
 
   // Delete post
   const deletePost = async (id) => {
@@ -92,7 +85,6 @@ const PostsContextProvider = (props) => {
     } catch (error) {
       console.log(error);
     }
-
   }
   // Update post
   const updatePost = (postId, updatedPost) => {
@@ -114,6 +106,7 @@ const PostsContextProvider = (props) => {
   const filterPosts = (filter) => {
     dispatch({ type: FILTER_POSTS, payload: filter })
   }
+
   // Clear filter
   const clearFilter = () => {
     dispatch({ type: CLEAR_FILTER })
@@ -127,6 +120,7 @@ const PostsContextProvider = (props) => {
       .then(doc => dispatch({ type: GET_SINGLE_POST, payload: doc.data() }))
       .catch(err => console.log(err.message))
   }
+
   // Get Post Comments / Real time listener
   const getPostComments = (id) => {
     const unsubscribe = db.collection('comments')
@@ -153,8 +147,6 @@ const PostsContextProvider = (props) => {
     dispatch({ type: SINGLE_POST_CLEANUP })
   }
 
-
-
   return (
     <PostsContext.Provider value={{
       posts: state.posts,
@@ -176,7 +168,6 @@ const PostsContextProvider = (props) => {
       addComment,
       singlePostCleanup,
       realTimeListenerPosts,
-      // getCurrentUserPosts,
       realTimeListenerUserPosts
     }}>
       {props.children}
