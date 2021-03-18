@@ -37,6 +37,7 @@ const PostsContextProvider = (props) => {
   useEffect(() => {
     if (!currentUser) {
       dispatch({ type: CLEAR_ALL_POSTS })
+      console.log('Clear all posts ran');
     }
   }, [currentUser])
 

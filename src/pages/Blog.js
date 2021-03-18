@@ -10,6 +10,7 @@ const Blog = () => {
 
   useEffect(() => {
     const unsubscribe = realTimeListenerPosts('posts', getPosts);
+    console.log('useEffect ran');
     return unsubscribe;
   }, [])
 
@@ -31,3 +32,6 @@ const Blog = () => {
 }
 
 export default Blog;
+
+
+// Fix the request problem !!!

@@ -27,12 +27,13 @@ a {
 
 .content {
   margin: 100px auto auto auto;
-  max-width: 100%;
+  width: 1200px;
   max-width: 1800px;
   height: 75vh;
-  display: grid;
+  /* display: grid; */
   /* grid-template-columns: 1fr auto 1fr; */
-  grid-template-columns: repeat(8, 1fr);
+  /* grid-template-columns: repeat(8, 1fr); */
+  display: flex;
   gap: 50px;
 }
 .content .blog-container{

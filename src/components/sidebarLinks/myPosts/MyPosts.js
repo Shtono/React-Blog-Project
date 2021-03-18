@@ -11,7 +11,7 @@ const MyPosts = () => {
   useEffect(() => {
     const unsubscribe = realTimeListenerUserPosts();
     return unsubscribe;
-  })
+  }, [])
 
   return (
     <div className="blog-container">

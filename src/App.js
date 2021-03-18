@@ -17,6 +17,7 @@ import SeachUsers from './components/sidebarLinks/searchUsers/SearchUsers';
 import AddPost from './components/blogPost/AddPost';
 import MyPosts from './components/sidebarLinks/myPosts/MyPosts';
 import ChatRooms from './components/sidebarLinks/chatRooms/ChatRooms';
+import NoMatch from './components/privateRoutes/NoMatch';
 
 function App() {
 
@@ -29,22 +30,24 @@ function App() {
             <div className="content">
               <Sidebar />
               {/* Try to implement a container (if needed)  for CSS*/}
-              <Switch>
-                <UsersContextProvider>
+              <UsersContextProvider>
+                <Switch>
                   <PrivateRoute exact path='/' component={Home} />
-                  <PrivateRoute exact path='/blog' component={Blog} />
+                  <PrivateRoute path='/blog' component={Blog} />
                   <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
 
-                  <PrivateRoute exact path="/myprofile" component={MyProfile} />
-                  <PrivateRoute exact path="/searchUsers" component={SeachUsers} />
-                  <PrivateRoute exact path="/createPost" component={AddPost} />
-                  <PrivateRoute exact path="/myPosts" component={MyPosts} />
-                  <PrivateRoute exact path="/chatrooms" component={ChatRooms} />
+                  <PrivateRoute path="/myprofile" component={MyProfile} />
+                  <PrivateRoute path="/searchUsers" component={SeachUsers} />
+                  <PrivateRoute path="/createPost" component={AddPost} />
+                  <PrivateRoute path="/myPosts" component={MyPosts} />
+                  <PrivateRoute path="/chatrooms" component={ChatRooms} />
 
                   <Route path='/login' component={Login} />
                   <Route path='/signup' component={Signup} />
-                </UsersContextProvider>
-              </Switch>
+
+                  <Route path='*' component={NoMatch} />
+                </Switch>
+              </UsersContextProvider>
             </div>
             <Footer />
           </div>

@@ -13,13 +13,13 @@ const SinglePost = (props) => {
   useEffect(() => {
     const unsubscribe = getPostComments(postId);
     return unsubscribe;
-  }, [postId])
+  }, [])
 
   // Get Post
   useEffect(() => {
     getSinglePost(postId)
     return singlePostCleanup
-  }, [postId])
+  }, [])
 
   return (
     (singlePost && postComments) ?

@@ -25,6 +25,7 @@ const UsersContextProvider = (props) => {
 
   const [state, dispatch] = useReducer(usersReducer, initialState)
 
+  // Get user info after signup
   useEffect(() => {
     if (currentUser) {
       getUserInfo(currentUser.uid)
@@ -33,16 +34,13 @@ const UsersContextProvider = (props) => {
 
   // Get current user info when log in / Clear State when log out
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        dispatch({ type: SET_LOADING_TRUE })
-        getUserInfo(user.uid)
-      } else {
-        dispatch({ type: CLEAR_USERS })
-      }
-    })
-    return unsubscribe;
-  }, [])
+    if (currentUser) {
+      dispatch({ type: SET_LOADING_TRUE })
+      getUserInfo(currentUser.uid)
+    } else {
+      dispatch({ type: CLEAR_USERS })
+    }
+  }, [currentUser])
 
   // Get users from DB / Real time listener 
   const getUsers = () => {
