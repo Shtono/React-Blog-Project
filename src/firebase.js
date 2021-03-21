@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/storage'
 import 'firebase/firestore'
 import 'firebase/auth'
 
@@ -19,6 +20,7 @@ const app = firebase.initializeApp({
 //   appId: process.env.REACT_APP_FIREBASE_APP_ID
 // })
 
+export const fbStorage = app.storage();
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 export const db = app.firestore()
 export const auth = app.auth()

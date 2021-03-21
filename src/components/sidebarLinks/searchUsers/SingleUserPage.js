@@ -12,6 +12,7 @@ const SingleUserPage = ({ match }) => {
     return singleUser ? (
         <div>
             <h1>Username: {singleUser.username}</h1>
+            <img src={singleUser.imageUrl} alt="user image" />
             <br /><br /><br />
             <h2>Name: {singleUser.name || 'N/A'}</h2>
             <h2>Age: {singleUser.age}</h2>
