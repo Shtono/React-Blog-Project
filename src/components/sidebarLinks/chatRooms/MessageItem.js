@@ -9,7 +9,7 @@ class MessageItem extends Component {
             <div>
                 <small>{author}</small>
                 <p>{body}</p>
-                <small>{createdAt && formatDistanceToNow(createdAt.toDate())}</small>
+                <small>{createdAt && formatDistanceToNow(createdAt.toDate())} ago</small>
             </div>
         )
     }

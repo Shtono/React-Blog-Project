@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth/AuthContext';
 import { db, timestamp } from '../../../firebase';
 import ChatLinks from './ChatLinks';
@@ -52,53 +52,93 @@ class ChatRooms extends Component {
         this.setState({ socialRoom: chats })
     }
 
+    setMessage(e) {
+        this.setState({ message: { ...this.state.message, body: e.target.value } })
+    }
+
+    sendMessage(e) {
+        e.preventDefault();
+        db.collection('chatrooms').add({
+            ...this.state.message,
+            createdAt: timestamp()
+        })
+        this.setState({ message: { ...this.state.message, body: '' } })
+    }
+
+    dbChatListener(room, callback) {
+        const unsubscribe = db.collection('chatrooms')
+            .where("room", "==", room)
+            .orderBy("createdAt", "desc")
+            .onSnapshot(snapshot => {
+                const chatArr = snapshot.docs.map(doc => {
+                    return { ...doc.data(), id: doc.id }
+                })
+                callback(chatArr)
+            })
+        return unsubscribe;
+    }
+
 
     render() {
         const { date, jsRoom, reactRoom, techRoom, socialRoom } = this.state;
         const { currentUser } = this.context;
         const { displayName } = currentUser;
         return (
-            <Router>
-                <div style={mainStyle}>
-                    <div>
-                        <h1>{this.state.title}</h1>
-                        <h2>{this.state.welcome}</h2>
-                        <br />
-                        <p>Time: {this.state.date.toLocaleTimeString()}</p>
-                    </div>
-                    <ChatLinks />
-                    <Switch>
-                        <Route exact path="/chatrooms/tech">
-                            <TechRoom
-                                techRoom={techRoom}
-                                displayName={displayName}
-                                getTechChats={this.getTechChats.bind(this)}
-                            />
-                        </Route>
-                        <Route path="/chatrooms/js">
-                            <JsRoom
-                                jsRoom={jsRoom}
-                                displayName={displayName}
-                                getJsChats={this.getJsChats.bind(this)}
-                            />
-                        </Route>
-                        <Route path="/chatrooms/react">
-                            <ReactRoom
-                                reactRoom={reactRoom}
-                                displayName={displayName}
-                                getReactChats={this.getReactChats.bind(this)}
-                            />
-                        </Route>
-                        <Route path="/chatrooms/social">
-                            <SocialRoom
-                                socialRoom={socialRoom}
-                                displayName={displayName}
-                                getSocialChats={this.getSocialChats.bind(this)}
-                            />
-                        </Route>
-                    </Switch>
+            <div style={mainStyle}>
+                <div>
+                    <h1>{this.state.title}</h1>
+                    <h2>{this.state.welcome}</h2>
+                    <br />
+                    <p>Time: {this.state.date.toLocaleTimeString()}</p>
                 </div>
-            </Router>
+                <ChatLinks />
+                <Switch>
+                    <Route exact path="/chatrooms/tech">
+                        <TechRoom
+                            room='techroom'
+                            roomState={techRoom}
+                            displayName={displayName}
+                            getChats={this.getTechChats.bind(this)}
+                            sendMessage={this.sendMessage}
+                            setMessage={this.setMessage}
+                            listener={this.dbChatListener}
+                        />
+                    </Route>
+                    <Route exact path="/chatrooms/JS">
+                        <JsRoom
+                            room='jsroom'
+                            roomState={jsRoom}
+                            displayName={displayName}
+                            getChats={this.getJsChats.bind(this)}
+                            sendMessage={this.sendMessage}
+                            setMessage={this.setMessage}
+                            listener={this.dbChatListener}
+                        />
+                    </Route>
+                    <Route exact path="/chatrooms/react">
+                        <ReactRoom
+                            room='reactroom'
+                            roomState={reactRoom}
+                            displayName={displayName}
+                            getChats={this.getReactChats.bind(this)}
+                            sendMessage={this.sendMessage}
+                            setMessage={this.setMessage}
+                            listener={this.dbChatListener}
+                        />
+                    </Route>
+                    <Route exact path="/chatrooms/social">
+                        <SocialRoom
+                            room='socialroom'
+                            roomState={socialRoom}
+                            displayName={displayName}
+                            getChats={this.getSocialChats.bind(this)}
+                            sendMessage={this.sendMessage}
+                            setMessage={this.setMessage}
+                            listener={this.dbChatListener}
+                        />
+                    </Route>
+                </Switch>
+            </div>
         )
     }
 }
@@ -106,5 +146,5 @@ class ChatRooms extends Component {
 export default ChatRooms;
 
 const mainStyle = {
-    width: '100%',
+    width: '100%'
 }

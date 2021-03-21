@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { db, timestamp } from '../../../../firebase';
 import ChatWindow from '../ChatWindow';
 import SendMessage from '../SendMessage';
 
@@ -10,56 +9,35 @@ class JsRoom extends Component {
             unsubscribe: null,
             message: {
                 body: '',
-                room: 'jsroom',
+                room: this.props.room,
                 author: this.props.displayName
             }
         }
     }
-
     componentDidMount() {
         this.setState({
-            unsubscribe: db.collection('chatrooms')
-                .where("room", "==", "jsroom")
-                .orderBy("createdAt", "desc")
-                .onSnapshot(snapshot => {
-                    const chatArr = snapshot.docs.map(doc => {
-                        return { ...doc.data(), id: doc.id }
-                    })
-                    this.props.getJsChats(chatArr)
-                })
+            unsubscribe: this.props.listener(this.props.room, this.props.getChats)
         })
     }
 
     componentWillUnmount() {
         this.state.unsubscribe();
-        console.log('JSRoom unmounted');
+        console.log(`${this.props.room} unmounted`);
     }
-
-    setMessage(e) {
-        this.setState({ message: { ...this.state.message, body: e.target.value } })
-    }
-
-    sendMessage(e) {
-        e.preventDefault();
-        db.collection('chatrooms').add({
-            ...this.state.message,
-            createdAt: timestamp()
-        })
-    }
-
 
     render() {
+        const { roomState, sendMessage, setMessage } = this.props;
+        const { message } = this.state;
         return (
             <div>
-                <ChatWindow msgArr={this.props.jsRoom} />
+                <ChatWindow msgArr={roomState} />
                 <SendMessage
-                    submit={this.sendMessage.bind(this)}
-                    value={this.state.message.body}
-                    onChange={this.setMessage.bind(this)}
+                    submit={sendMessage.bind(this)}
+                    value={message.body}
+                    onChange={setMessage.bind(this)}
                 />
             </div>
-
-        );
+        )
     }
 
 }
