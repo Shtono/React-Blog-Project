@@ -7,7 +7,8 @@ import {
   CLEAR_USERS,
   GET_CURRENT_USER,
   SET_LOADING_TRUE,
-  FILTER_USERS
+  FILTER_USERS,
+  GET_SINGLE_USER
 } from '../types';
 
 
@@ -20,6 +21,7 @@ const UsersContextProvider = (props) => {
     users: null,
     currentUserInfo: null,
     filteredUsers: null,
+    singleUser: null,
     loading: true
   }
 
@@ -72,14 +74,23 @@ const UsersContextProvider = (props) => {
     dispatch({ type: FILTER_USERS, payload: filter })
   }
 
+  // Get Single User
+  const getSingleUser = (userId) => {
+    db.collection('users').doc(userId).get()
+      .then(doc => dispatch({ type: GET_SINGLE_USER, payload: doc.data() }))
+      .catch(err => console.log(err.message))
+  }
+
   return (
     <UsersContext.Provider value={{
       users: state.users,
       currentUserInfo: state.currentUserInfo,
       filteredUsers: state.filteredUsers,
+      singleUser: state.singleUser,
       getUsers,
       updateUserInfo,
-      filterUsers
+      filterUsers,
+      getSingleUser
     }}>
       {!state.loading && props.children}
     </UsersContext.Provider>

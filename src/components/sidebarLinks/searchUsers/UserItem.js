@@ -1,12 +1,16 @@
-export default function UserItem({ name, isActive }) {
+import { Link } from 'react-router-dom';
+
+const UserItem = ({ name, isActive, userId }) => {
   return (
     <div style={style}>
       <div style={isActive ? statusStyleOn : statusStyleOff}></div>
       <h3>{name}</h3>
-      <button style={btnStyle}>view</button>
+      <Link to={`/users/${userId}`} style={btnStyle}>View</Link>
     </div>
   )
 }
+
+export default UserItem;
 
 const style = {
   width: '100%',
@@ -19,7 +23,8 @@ const style = {
 }
 
 const btnStyle = {
-  fontSize: '15px '
+  fontSize: '15px ',
+  color: '#fff'
 }
 
 const statusStyleOn = {

@@ -12,7 +12,7 @@ const Sidebar = () => {
       <ul>
         <Link to="/myprofile">My Profile</Link>
         <Link to="/chatrooms">Chat Rooms</Link>
-        <Link to="/searchUsers">Find User</Link>
+        <Link to="/users">Find User</Link>
         <Link to="/createPost">Create Post</Link>
         <Link to="/myPosts">My Posts</Link>
         <Link to="#" onClick={logout}>Log Out</Link>

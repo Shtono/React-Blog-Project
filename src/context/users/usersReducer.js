@@ -1,4 +1,11 @@
-import { GET_USERS, CLEAR_USERS, GET_CURRENT_USER, SET_LOADING_TRUE, FILTER_USERS } from '../types';
+import {
+  GET_USERS,
+  CLEAR_USERS,
+  GET_CURRENT_USER,
+  SET_LOADING_TRUE,
+  FILTER_USERS,
+  GET_SINGLE_USER
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -20,6 +27,11 @@ export default (state, action) => {
           return user.username.toLowerCase().includes(action.payload.toLowerCase())
         })
       }
+    case GET_SINGLE_USER:
+      return {
+        ...state,
+        singleUser: action.payload
+      }
     case CLEAR_USERS:
       return {
         ...state,
@@ -32,6 +44,7 @@ export default (state, action) => {
         ...state,
         loading: true
       }
+    default:
+      return state
   }
-
 }

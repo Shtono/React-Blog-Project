@@ -18,6 +18,7 @@ import AddPost from './components/blogPost/AddPost';
 import MyPosts from './components/sidebarLinks/myPosts/MyPosts';
 import ChatRooms from './components/sidebarLinks/chatRooms/ChatRooms';
 import NoMatch from './components/privateRoutes/NoMatch';
+import SingleUserPage from './components/sidebarLinks/searchUsers/SingleUserPage';
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
                   <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
 
                   <PrivateRoute path="/myprofile" component={MyProfile} />
-                  <PrivateRoute path="/searchUsers" component={SeachUsers} />
+                  <PrivateRoute exact path="/users" component={SeachUsers} />
+                  <PrivateRoute path="/users/:userId" component={SingleUserPage} />
                   <PrivateRoute path="/createPost" component={AddPost} />
                   <PrivateRoute path="/myPosts" component={MyPosts} />
                   <PrivateRoute path="/chatrooms" component={ChatRooms} />
