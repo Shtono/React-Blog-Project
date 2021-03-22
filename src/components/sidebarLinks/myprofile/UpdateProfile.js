@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
 const UpdateProfile = (props) => {
-
   const [userInfo, setuserInfo] = useState({
-    name: props.name ? props.name : '',
-    age: props.age ? props.age : '',
-    city: props.city ? props.city : '',
-    job: props.job ? props.job : '',
-    company: props.company ? props.company : '',
-    website: props.website ? props.website : ''
+    name: props.name || '',
+    age: props.age || '',
+    city: props.city || '',
+    job: props.job || '',
+    company: props.company || '',
+    website: props.website || ''
   })
+  // Destructure props and state
   const { name, age, city, job, company, website } = userInfo;
+  const { getUserInfo, id, showUpdate } = props;
 
   const onChange = (e) => {
     setuserInfo({ ...userInfo, [e.target.name]: e.target.value })
@@ -20,7 +21,8 @@ const UpdateProfile = (props) => {
     e.preventDefault();
     props.updateUserInfo(userInfo);
     console.log(userInfo);
-    // setuserInfo({ name: '', age: '', city: '', job: '', company: '', website: '' })
+    getUserInfo(id)
+    showUpdate()
   }
 
   return props.showInfo ? (
@@ -56,12 +58,20 @@ const UpdateProfile = (props) => {
           onChange={onChange}
         />
         <div>
-          <button onClick={props.update}>Cancel</button>
+          <button onClick={props.showUpdate}>Cancel</button>
           <button className="btn-green" type="submit">Update</button>
         </div>
       </form>
     </div>
-  ) : (<div></div>)
+  ) : (<div style={style}>
+    <h2>Name: {name}</h2>
+    <h2>Age: {age}</h2>
+    <h2>City: {city}</h2>
+    <h2>Job: {job}</h2>
+    <h2>Company: {company}</h2>
+    <h2>Website: {website}</h2>
+
+  </div>)
 }
 
 const style = {

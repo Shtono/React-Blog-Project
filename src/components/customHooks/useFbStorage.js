@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/auth/AuthContext';
+import { UsersContext } from '../../context/users/UsersContext';
 import { db, fbStorage, timestamp } from '../../firebase';
 
 const useFbStorage = (file) => {
@@ -7,6 +8,7 @@ const useFbStorage = (file) => {
     const [error, setError] = useState(null);
     const [url, setUrl] = useState(null);
     const { currentUser } = useContext(AuthContext);
+    const { getUserInfo } = useContext(UsersContext);
 
     useEffect(() => {
         // References
@@ -22,7 +24,8 @@ const useFbStorage = (file) => {
         }, async () => {
             const url = await storageRef.getDownloadURL();
             setUrl(url);
-            collectionRef.doc(currentUser.uid).update({ imageUrl: url })
+            await collectionRef.doc(currentUser.uid).update({ imageUrl: url })
+            getUserInfo(currentUser.uid)
             // collectionRef.add({
             //     url,
             //     createdAt: timestamp(),

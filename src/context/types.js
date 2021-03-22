@@ -1,5 +1,6 @@
 // POSTS CONTEXT
 export const GET_POSTS = 'GET_POSTS';
+export const GET_MORE_POSTS = 'GET_MORE_POSTS';
 export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const FILTER_POSTS = 'FILTER_POSTS';

@@ -4,6 +4,7 @@ import postReducer from './postsReducer';
 import { db } from '../../firebase';
 import {
   GET_POSTS,
+  GET_MORE_POSTS,
   GET_CURRENT_USER_POSTS,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -20,13 +21,17 @@ export const PostsContext = createContext();
 
 const PostsContextProvider = (props) => {
   const { currentUser } = useContext(AuthContext);
+  const postsRef = db.collection('posts');
 
   const initialState = {
-    posts: null,
+    posts: [],
+    latestPost: null,
     current: null,
     filtered: null,
     userPosts: null,
     singlePost: null,
+    singlePostComments: null,
+    singlePostLikes: null,
     postComments: null,
     error: null
   }
@@ -56,21 +61,36 @@ const PostsContextProvider = (props) => {
   }
 
   // Real time listener for All posts
-  const realTimeListenerPosts = (collection, callback) => {
-    const unsubscribe = db.collection(collection)
+  const getPosts = () => {
+    db.collection('posts')
       .orderBy("date", "desc")
-      .onSnapshot(snapshot => {
+      .limit(5)
+      .get()
+      .then(snapshot => {
         let posts = snapshot.docs.map(doc => {
           return { ...doc.data(), id: doc.id }
         })
-        callback(posts)
+        dispatch({ type: GET_POSTS, payload: posts })
       })
-    return unsubscribe;
+      .catch(err => console.log(err.message))
   }
 
-  // Get posts / real time update
-  const getPosts = (posts) => {
-    dispatch({ type: GET_POSTS, payload: posts })
+  const loadNextPage = (post) => {
+    if (!post) {
+      return
+    }
+    db.collection('posts')
+      .orderBy("date", "desc")
+      .startAfter(post.date)
+      .limit(5)
+      .get()
+      .then(snapshot => {
+        let posts = snapshot.docs.map(doc => {
+          return { ...doc.data(), id: doc.id }
+        })
+        dispatch({ type: GET_MORE_POSTS, payload: posts })
+      })
+      .catch(err => console.log(err.message))
   }
 
   // Add post
@@ -142,6 +162,22 @@ const PostsContextProvider = (props) => {
       .then(() => console.log('Comment added...'))
       .catch(err => console.log(err))
   }
+  // Increase comment count of post
+  const addToCommentsCount = (postId) => {
+    postsRef.doc(postId).update({ comments: state.singlePostComments + 1 })
+  }
+  // Increase likes count of post
+  const addToLikesCount = (postId) => {
+    postsRef.doc(postId).update({
+      likes: [...state.singlePostLikes, currentUser.uid],
+      likesCount: state.singlePostLikes.length + 1
+    })
+    console.log('Liked!');
+  }
+
+  const isPostLiked = () => {
+    return state.singlePostLikes.includes(currentUser.uid) ? true : false
+  }
 
   // Single post cleanup
   const singlePostCleanup = () => {
@@ -156,7 +192,10 @@ const PostsContextProvider = (props) => {
       filtered: state.filtered,
       singlePost: state.singlePost,
       postComments: state.postComments,
+      singlePostLikes: state.singlePostLikes,
+      latestPost: state.latestPost,
       getPosts,
+      loadNextPage,
       addPost,
       deletePost,
       filterPosts,
@@ -166,9 +205,11 @@ const PostsContextProvider = (props) => {
       clearCurrent,
       getSinglePost,
       getPostComments,
+      isPostLiked,
       addComment,
+      addToCommentsCount,
+      addToLikesCount,
       singlePostCleanup,
-      realTimeListenerPosts,
       realTimeListenerUserPosts
     }}>
       {props.children}

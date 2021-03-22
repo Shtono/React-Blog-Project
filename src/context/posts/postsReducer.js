@@ -1,6 +1,7 @@
 import {
   CLEAR_CURRENT,
   GET_POSTS,
+  GET_MORE_POSTS,
   SET_CURRENT,
   FILTER_POSTS,
   CLEAR_FILTER,
@@ -16,7 +17,14 @@ export default (state, action) => {
     case GET_POSTS:
       return {
         ...state,
-        posts: action.payload
+        posts: action.payload,
+        latestPost: action.payload[4]
+      }
+    case GET_MORE_POSTS:
+      return {
+        ...state,
+        posts: [...state.posts, ...action.payload],
+        latestPost: action.payload[4]
       }
     case CLEAR_ALL_POSTS:
       return {
@@ -32,12 +40,14 @@ export default (state, action) => {
     case GET_SINGLE_POST:
       return {
         ...state,
-        singlePost: action.payload
+        singlePost: action.payload,
+        singlePostLikes: action.payload.likes
       }
     case GET_POST_COMMENTS:
       return {
         ...state,
-        postComments: action.payload
+        postComments: action.payload,
+        singlePostComments: action.payload.length
       }
     case SINGLE_POST_CLEANUP:
       return {

@@ -88,6 +88,7 @@ const UsersContextProvider = (props) => {
       filteredUsers: state.filteredUsers,
       singleUser: state.singleUser,
       getUsers,
+      getUserInfo,
       updateUserInfo,
       filterUsers,
       getSingleUser

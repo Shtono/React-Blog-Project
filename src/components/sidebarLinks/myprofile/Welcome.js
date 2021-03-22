@@ -1,4 +1,4 @@
-const Welcome = ({ displayName, email, update, toggleShowUpload, imageUrl }) => {
+const Welcome = ({ displayName, email, showUpdate, toggleShowUpload, imageUrl }) => {
   return (
     <div>
       <h1>Welcome back </h1>
@@ -6,7 +6,7 @@ const Welcome = ({ displayName, email, update, toggleShowUpload, imageUrl }) => 
       <img src={imageUrl} alt="Profile Photo" />
       <h3>Email: {email}</h3>
       <div>
-        <button className="btn-blue" onClick={update}>Update Profile</button>
+        <button className="btn-blue" onClick={showUpdate}>Update Profile</button>
         <button className="btn-blue" onClick={toggleShowUpload}>Update Photo</button>
       </div>
     </div>
