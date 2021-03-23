@@ -9,7 +9,9 @@ import {
   GET_SINGLE_POST,
   GET_POST_COMMENTS,
   SINGLE_POST_CLEANUP,
-  CLEAR_ALL_POSTS
+  CLEAR_ALL_POSTS,
+  SET_NOTIFICATION,
+  REMOVE_NOTIFICATION
 } from "../types"
 
 export default (state, action) => {
@@ -76,6 +78,16 @@ export default (state, action) => {
       return {
         ...state,
         current: null
+      }
+    case SET_NOTIFICATION:
+      return {
+        ...state,
+        postNotification: { ...action.payload }
+      }
+    case REMOVE_NOTIFICATION:
+      return {
+        ...state,
+        postNotification: null
       }
     default:
       return state

@@ -27,7 +27,7 @@ const AuthContextProvider = (props) => {
       setSignUpCompleted(true);
       history.push('/')
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 

@@ -13,7 +13,9 @@ import {
   GET_SINGLE_POST,
   GET_POST_COMMENTS,
   SINGLE_POST_CLEANUP,
-  CLEAR_ALL_POSTS
+  CLEAR_ALL_POSTS,
+  SET_NOTIFICATION,
+  REMOVE_NOTIFICATION
 } from '../types';
 
 
@@ -33,7 +35,7 @@ const PostsContextProvider = (props) => {
     singlePostComments: null,
     singlePostLikes: null,
     postComments: null,
-    error: null
+    postNotification: null
   }
 
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -72,7 +74,7 @@ const PostsContextProvider = (props) => {
         })
         dispatch({ type: GET_POSTS, payload: posts })
       })
-      .catch(err => console.log(err.message))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Get next batch of posts when user scrolls to the bottom of the page
@@ -91,27 +93,30 @@ const PostsContextProvider = (props) => {
         })
         dispatch({ type: GET_MORE_POSTS, payload: posts })
       })
-      .catch(err => console.log(err.message))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Add post
   const addPost = (post) => {
     db.collection('posts').add(post)
-      .then(console.log('post added...'))
+      .then(setDropdown('success', 'Post Added ;)'))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Delete post
   const deletePost = async (id) => {
     try {
       await db.collection('posts').doc(id).delete();
-    } catch (error) {
-      console.log(error);
+      setDropdown('success', 'Post deleted')
+    } catch (err) {
+      setDropdown('error', err.message)
     }
   }
   // Update post
   const updatePost = (postId, updatedPost) => {
     db.collection('posts').doc(postId).update(updatedPost)
-      .catch(err => console.log(err.message))
+      .then(setDropdown('success', 'Post updated'))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Set current post
@@ -140,7 +145,7 @@ const PostsContextProvider = (props) => {
       .doc(id)
       .get()
       .then(doc => dispatch({ type: GET_SINGLE_POST, payload: doc.data() }))
-      .catch(err => console.log(err.message))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Get Post Comments / Real time listener
@@ -160,8 +165,8 @@ const PostsContextProvider = (props) => {
   // Add Comment
   const addComment = (comment) => {
     db.collection('comments').add(comment)
-      .then(() => console.log('Comment added...'))
-      .catch(err => console.log(err))
+      .then(setDropdown('success', 'Comment added'))
+      .catch(err => setDropdown('error', err.message))
   }
   // Increase comment count of post
   const addToCommentsCount = (postId) => {
@@ -173,7 +178,8 @@ const PostsContextProvider = (props) => {
       likes: [...state.singlePostLikes, currentUser.uid],
       likesCount: state.singlePostLikes.length + 1
     })
-    console.log('Liked!');
+      .then(() => setDropdown('success', 'Post liked'))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Check if current user has liked the post
@@ -186,6 +192,14 @@ const PostsContextProvider = (props) => {
     dispatch({ type: SINGLE_POST_CLEANUP })
   }
 
+  // Notification
+  const setDropdown = (type, message) => {
+    dispatch({ type: SET_NOTIFICATION, payload: { type, message } })
+    setTimeout(() => {
+      dispatch({ type: REMOVE_NOTIFICATION })
+    }, 3000)
+  }
+
   return (
     <PostsContext.Provider value={{
       posts: state.posts,
@@ -196,6 +210,7 @@ const PostsContextProvider = (props) => {
       singlePost: state.singlePost,
       postComments: state.postComments,
       singlePostLikes: state.singlePostLikes,
+      postNotification: state.postNotification,
       getPosts,
       loadNextPage,
       addPost,
@@ -212,7 +227,8 @@ const PostsContextProvider = (props) => {
       addToCommentsCount,
       addToLikesCount,
       singlePostCleanup,
-      realTimeListenerUserPosts
+      realTimeListenerUserPosts,
+      setDropdown
     }}>
       {props.children}
     </PostsContext.Provider>

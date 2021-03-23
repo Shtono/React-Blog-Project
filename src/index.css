@@ -24,6 +24,33 @@ img {
   border: rgba(195, 195, 195, 0.239) solid 10px;
 }
 
+/* Notifications */
+.notification {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  width: 250px;
+  height: 75px;
+  color: #000;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+.notification.success {
+  opacity: 1;
+  background-color: green;
+  top: 100px;
+  transition: all 0.3s ease-out;
+  transition: opacity 1s ease-out;
+}
+.notification.error {
+  opacity: 1;
+  background-color: red;
+  top: 100px;
+  transition: all 0.3s ease-out;
+  /* transition: opacity 0.5s ease-out; */
+}
+
 /* Mobile Styling */
 .App {
   min-height: 100vh;

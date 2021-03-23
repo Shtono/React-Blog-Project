@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/auth/AuthContext';
 
 const AddPost = () => {
   const { currentUser } = useContext(AuthContext);
-  const { addPost } = useContext(PostsContext);
+  const { addPost, setDropdown } = useContext(PostsContext);
   const history = useHistory();
 
   const [post, setPost] = useState({
@@ -36,6 +36,8 @@ const AddPost = () => {
         body: ''
       })
       history.push('/myPosts')
+    } else {
+      setDropdown('error', 'Please fill all fields')
     }
   }
 

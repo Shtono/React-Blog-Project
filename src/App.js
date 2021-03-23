@@ -19,6 +19,7 @@ import MyPosts from './components/sidebarLinks/myPosts/MyPosts';
 import ChatRooms from './components/sidebarLinks/chatRooms/ChatRooms';
 import NoMatch from './components/privateRoutes/NoMatch';
 import SingleUserPage from './components/sidebarLinks/searchUsers/SingleUserPage';
+import Notification from './components/layout/Notification';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
       <AuthContextProvider>
         <PostsContextProvider>
           <div className="App">
+            <Notification />
             <Navbar />
             <div className="content">
               <Sidebar />
