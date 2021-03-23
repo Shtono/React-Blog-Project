@@ -1,13 +1,12 @@
 import '../styles/blog.css'
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
 import BlogPost from '../components/blogPost/BlogPost';
 import FilterPosts from '../components/blogPost/FilterPosts';
 import UpdatePost from '../components/blogPost/UpdatePost';
-import { db } from '../firebase';
 
 const Blog = () => {
-  const { getPosts, posts, updatePost, deletePost, current, setCurrent, clearCurrent, filtered, latestPost, loadNextPage } = useContext(PostsContext);
+  const { getPosts, posts, updatePost, current, clearCurrent, filtered, latestPost, loadNextPage } = useContext(PostsContext);
 
   useEffect(() => {
     getPosts();
@@ -27,17 +26,18 @@ const Blog = () => {
 
   return (
     <div className="blog-container" onScroll={onScroll}>
-      <button onClick={onScroll}>Next Page</button>
       <FilterPosts />
+
       {current && <UpdatePost {...updatePostProps} />}
+
       {(posts && !filtered) &&
         posts.map((post) => (
-          <BlogPost key={post.id} postId={post.id} userId={post.author} title={post.title} body={post.body} comments={post.comments} post={post} deletePost={deletePost} setCurrent={setCurrent} />
+          <BlogPost key={post.id} post={post} />
         ))}
 
       {filtered &&
         filtered.map((post) => (
-          <BlogPost key={post.id} postId={post.id} userId={post.author} title={post.title} body={post.body} post={post} deletePost={deletePost} setCurrent={setCurrent} />
+          <BlogPost key={post.id} post={post} />
         ))}
     </div>
   );

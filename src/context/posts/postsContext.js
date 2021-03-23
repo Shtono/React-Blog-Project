@@ -49,7 +49,7 @@ const PostsContextProvider = (props) => {
   // Real time listener for current User posts
   const realTimeListenerUserPosts = () => {
     const unsubscribe = db.collection('posts')
-      .orderBy("date", "desc")
+      .orderBy("createdAt", "desc")
       .where("uid", "==", currentUser.uid)
       .onSnapshot(snapshot => {
         let posts = snapshot.docs.map(doc => {
@@ -60,10 +60,10 @@ const PostsContextProvider = (props) => {
     return unsubscribe;
   }
 
-  // Real time listener for All posts
+  // Get first batch of posts
   const getPosts = () => {
     db.collection('posts')
-      .orderBy("date", "desc")
+      .orderBy("createdAt", "desc")
       .limit(5)
       .get()
       .then(snapshot => {
@@ -75,13 +75,14 @@ const PostsContextProvider = (props) => {
       .catch(err => console.log(err.message))
   }
 
+  // Get next batch of posts when user scrolls to the bottom of the page
   const loadNextPage = (post) => {
     if (!post) {
       return
     }
     db.collection('posts')
-      .orderBy("date", "desc")
-      .startAfter(post.date)
+      .orderBy("createdAt", "desc")
+      .startAfter(post.createdAt)
       .limit(5)
       .get()
       .then(snapshot => {
@@ -175,6 +176,7 @@ const PostsContextProvider = (props) => {
     console.log('Liked!');
   }
 
+  // Check if current user has liked the post
   const isPostLiked = () => {
     return state.singlePostLikes.includes(currentUser.uid) ? true : false
   }
@@ -187,13 +189,13 @@ const PostsContextProvider = (props) => {
   return (
     <PostsContext.Provider value={{
       posts: state.posts,
+      latestPost: state.latestPost,
       current: state.current,
-      userPosts: state.userPosts,
       filtered: state.filtered,
+      userPosts: state.userPosts,
       singlePost: state.singlePost,
       postComments: state.postComments,
       singlePostLikes: state.singlePostLikes,
-      latestPost: state.latestPost,
       getPosts,
       loadNextPage,
       addPost,

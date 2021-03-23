@@ -8,7 +8,8 @@ import {
   GET_CURRENT_USER,
   SET_LOADING_TRUE,
   FILTER_USERS,
-  GET_SINGLE_USER
+  GET_SINGLE_USER,
+  CLEAR_SINGLE_USER
 } from '../types';
 
 
@@ -81,6 +82,11 @@ const UsersContextProvider = (props) => {
       .catch(err => console.log(err.message))
   }
 
+  // Clear Single User
+  const clearSingleUser = () => {
+    dispatch({ type: CLEAR_SINGLE_USER })
+  }
+
   return (
     <UsersContext.Provider value={{
       users: state.users,
@@ -91,7 +97,8 @@ const UsersContextProvider = (props) => {
       getUserInfo,
       updateUserInfo,
       filterUsers,
-      getSingleUser
+      getSingleUser,
+      clearSingleUser
     }}>
       {!state.loading && props.children}
     </UsersContext.Provider>

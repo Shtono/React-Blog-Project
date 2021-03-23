@@ -1,9 +1,13 @@
-const Post = ({ title, author, body, commentsCount }) => {
+const Post = ({ singlePost }) => {
+  const { title, author, body } = singlePost;
+
   return (
     <div>
-      <h2>{title}</h2>
-      <small>Posted by: {author}</small>
-      <p>{body}</p>
+      <div>
+        <h2>{title}</h2>
+        <small>Posted by: {author}</small>
+        <p>{body}</p>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import '../../styles/addPost.css'
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { timestamp } from '../../firebase';
 import { PostsContext } from '../../context/posts/PostsContext';
 import { AuthContext } from '../../context/auth/AuthContext';
@@ -7,12 +8,14 @@ import { AuthContext } from '../../context/auth/AuthContext';
 const AddPost = () => {
   const { currentUser } = useContext(AuthContext);
   const { addPost } = useContext(PostsContext);
+  const history = useHistory();
 
   const [post, setPost] = useState({
     title: '',
     body: '',
     solved: false,
-    likes: 0,
+    likes: [],
+    likesCount: 0,
     comments: 0,
     author: currentUser.displayName,
     uid: currentUser.uid
@@ -25,13 +28,14 @@ const AddPost = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (post.title !== '' && post.body !== '') {
-      const date = timestamp();
-      addPost({ ...post, date })
+      const createdAt = timestamp();
+      addPost({ ...post, createdAt })
       setPost({
         ...post,
         title: '',
         body: ''
       })
+      history.push('/myPosts')
     }
   }
 

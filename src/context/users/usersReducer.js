@@ -4,7 +4,8 @@ import {
   GET_CURRENT_USER,
   SET_LOADING_TRUE,
   FILTER_USERS,
-  GET_SINGLE_USER
+  GET_SINGLE_USER,
+  CLEAR_SINGLE_USER
 } from '../types';
 
 export default (state, action) => {
@@ -31,6 +32,11 @@ export default (state, action) => {
       return {
         ...state,
         singleUser: action.payload
+      }
+    case CLEAR_SINGLE_USER:
+      return {
+        ...state,
+        singleUser: null
       }
     case CLEAR_USERS:
       return {

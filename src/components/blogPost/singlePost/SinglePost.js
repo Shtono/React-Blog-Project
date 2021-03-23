@@ -31,15 +31,21 @@ const SinglePost = (props) => {
     addToLikesCount(postId)
     setIsLiked(true)
   }
+  // console.log(singlePost);
 
   return (
     (singlePost && postComments) ?
       <div className="single-post">
-        <Post title={singlePost.title} author={singlePost.author} body={singlePost.body} />
+        <Post singlePost={singlePost} />
+
         <p>{postComments.length} comments</p>
+
         {!isLiked && <button onClick={handleLike}>Like This Post</button>}
+
         {isLiked && <p>Liked</p>}
+
         <AddComment postId={postId} addComment={addComment} postedBy={currentUser.displayName} addToCommentsCount={addToCommentsCount} />
+
         {postComments && <Comments comments={postComments} />}
       </div>
       :

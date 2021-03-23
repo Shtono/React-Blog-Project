@@ -1,21 +1,25 @@
 import { Link } from 'react-router-dom';
 
 
-const BlogPost = ({ userId, title, body, postId, post, deletePost, setCurrent, comments }) => {
+const BlogPost = ({ post, deletePost, setCurrent }) => {
+  const { id, author, title, body, comments, likesCount } = post;
 
-  const handleDelete = () => deletePost(postId);
+  const handleDelete = () => deletePost(id);
   const handleCurrent = () => setCurrent(post);
 
   return (
     <div className="home">
       <div className="post">
         <h2>{title}</h2>
-        <small>Posted by: {userId}</small>
+        <br /><br />
+        <small>Posted by: {author}</small>
+        <br />
         <p>{body.slice(0, 250)}...</p>
-        <Link to={`/posts/${post.id}`}>Read More..</Link>
+        <Link to={`/posts/${id}`}>Read More..</Link>
         <p>{comments} comments</p>
-        <button className="btn-post btn-delete" onClick={handleDelete}>Delete</button>
-        <button className="btn-post btn-update" onClick={handleCurrent}>Update</button>
+        <p>{likesCount || 'no'} likes</p>
+        {deletePost && <button className="btn-post btn-delete" onClick={handleDelete}>Delete</button>}
+        {setCurrent && <button className="btn-post btn-update" onClick={handleCurrent}>Update</button>}
         <p></p>
       </div>
     </div>

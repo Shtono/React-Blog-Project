@@ -3,10 +3,8 @@ import BlogPost from "../../blogPost/BlogPost";
 import { PostsContext } from '../../../context/posts/PostsContext';
 import UpdatePost from '../../blogPost/UpdatePost';
 
-
 const MyPosts = () => {
   const { realTimeListenerUserPosts, userPosts, deletePost, setCurrent, current, clearCurrent, updatePost } = useContext(PostsContext);
-
 
   useEffect(() => {
     const unsubscribe = realTimeListenerUserPosts();
@@ -29,8 +27,3 @@ const MyPosts = () => {
 }
 
 export default MyPosts;
-
-
-// Order PostsContext
-
-// Start with ChatRooms class Component
