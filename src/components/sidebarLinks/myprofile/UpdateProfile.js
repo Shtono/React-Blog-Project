@@ -58,7 +58,7 @@ const UpdateProfile = (props) => {
           onChange={onChange}
         />
         <div>
-          <button onClick={props.showUpdate}>Cancel</button>
+          <button type="button" onClick={props.showUpdate}>Cancel</button>
           <button className="btn-green" type="submit">Update</button>
         </div>
       </form>

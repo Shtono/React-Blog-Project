@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import ProgressBar from '../../layout/ProgressBar'
+import ProgressBar from '../../layout/ProgressBar';
 
 const UploadPhoto = () => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const types = ['image/png', 'image/jpeg'];
+
 
     const handleChange = (e) => {
         let selected = e.target.files[0];

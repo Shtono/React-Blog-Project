@@ -7,13 +7,12 @@ const useFbStorage = (file) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
     const [url, setUrl] = useState(null);
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, setDropdown } = useContext(AuthContext);
     const { getUserInfo } = useContext(UsersContext);
 
     useEffect(() => {
         // References
         const storageRef = fbStorage.ref(file.name);
-        // const collectionRef = db.collection('userImages');
         const collectionRef = db.collection('users');
 
         storageRef.put(file).on('state_changed', (snapshot) => {
@@ -26,12 +25,7 @@ const useFbStorage = (file) => {
             setUrl(url);
             await collectionRef.doc(currentUser.uid).update({ imageUrl: url })
             getUserInfo(currentUser.uid)
-            // collectionRef.add({
-            //     url,
-            //     createdAt: timestamp(),
-            //     userId: currentUser.uid,
-            //     isProfilePicture: true
-            // })
+            setDropdown('success', 'Profile picture updated')
         })
     }, [file])
 

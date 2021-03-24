@@ -5,6 +5,7 @@ import { db } from '../../firebase';
 import {
   GET_POSTS,
   GET_MORE_POSTS,
+  SET_LOADING,
   GET_CURRENT_USER_POSTS,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -27,6 +28,7 @@ const PostsContextProvider = (props) => {
 
   const initialState = {
     posts: [],
+    loading: false,
     latestPost: null,
     current: null,
     filtered: null,
@@ -64,6 +66,7 @@ const PostsContextProvider = (props) => {
 
   // Get first batch of posts
   const getPosts = () => {
+    dispatch({ type: SET_LOADING })
     db.collection('posts')
       .orderBy("createdAt", "desc")
       .limit(5)
@@ -80,8 +83,10 @@ const PostsContextProvider = (props) => {
   // Get next batch of posts when user scrolls to the bottom of the page
   const loadNextPage = (post) => {
     if (!post) {
+      setDropdown('success', 'No more posts...')
       return
     }
+    dispatch({ type: SET_LOADING })
     db.collection('posts')
       .orderBy("createdAt", "desc")
       .startAfter(post.createdAt)
@@ -203,6 +208,7 @@ const PostsContextProvider = (props) => {
   return (
     <PostsContext.Provider value={{
       posts: state.posts,
+      loading: state.loading,
       latestPost: state.latestPost,
       current: state.current,
       filtered: state.filtered,

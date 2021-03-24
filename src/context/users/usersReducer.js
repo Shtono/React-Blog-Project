@@ -5,7 +5,9 @@ import {
   SET_LOADING_TRUE,
   FILTER_USERS,
   GET_SINGLE_USER,
-  CLEAR_SINGLE_USER
+  CLEAR_SINGLE_USER,
+  SET_NOTIFICATION,
+  REMOVE_NOTIFICATION
 } from '../types';
 
 export default (state, action) => {
@@ -49,6 +51,16 @@ export default (state, action) => {
       return {
         ...state,
         loading: true
+      }
+    case SET_NOTIFICATION:
+      return {
+        ...state,
+        userNotification: action.payload
+      }
+    case REMOVE_NOTIFICATION:
+      return {
+        ...state,
+        userNotification: null
       }
     default:
       return state

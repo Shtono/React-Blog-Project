@@ -6,7 +6,7 @@ import Comments from './Comments';
 import Post from './Post';
 
 const SinglePost = (props) => {
-  const { singlePost, getSinglePost, postComments, getPostComments, addComment, singlePostCleanup, addToCommentsCount, addToLikesCount, singlePostLikes, isPostLiked } = useContext(PostsContext);
+  const { singlePost, getSinglePost, postComments, getPostComments, addComment, singlePostCleanup, addToCommentsCount, addToLikesCount, singlePostLikes, isPostLiked, setDropdown } = useContext(PostsContext);
   const { currentUser } = useContext(AuthContext);
   const postId = props.match.params.blog_id;
 
@@ -31,7 +31,14 @@ const SinglePost = (props) => {
     addToLikesCount(postId)
     setIsLiked(true)
   }
-  // console.log(singlePost);
+
+  const addCommentProps = {
+    postId,
+    addComment,
+    postedBy: currentUser.displayName,
+    addToCommentsCount,
+    setDropdown
+  }
 
   return (
     (singlePost && postComments) ?
@@ -44,7 +51,7 @@ const SinglePost = (props) => {
 
         {isLiked && <p>Liked</p>}
 
-        <AddComment postId={postId} addComment={addComment} postedBy={currentUser.displayName} addToCommentsCount={addToCommentsCount} />
+        <AddComment {...addCommentProps} />
 
         {postComments && <Comments comments={postComments} />}
       </div>

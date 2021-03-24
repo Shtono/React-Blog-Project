@@ -28,12 +28,12 @@ function App() {
       <AuthContextProvider>
         <PostsContextProvider>
           <div className="App">
-            <Notification />
             <Navbar />
             <div className="content">
               <Sidebar />
               {/* Try to implement a container (if needed)  for CSS*/}
               <UsersContextProvider>
+                <Notification />
                 <Switch>
                   <PrivateRoute exact path='/' component={Home} />
                   <PrivateRoute path='/blog' component={Blog} />

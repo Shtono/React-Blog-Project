@@ -1,6 +1,7 @@
 import {
   CLEAR_CURRENT,
   GET_POSTS,
+  SET_LOADING,
   GET_MORE_POSTS,
   SET_CURRENT,
   FILTER_POSTS,
@@ -20,14 +21,22 @@ export default (state, action) => {
       return {
         ...state,
         posts: action.payload,
-        latestPost: action.payload[4]
+        latestPost: action.payload[4],
+        loading: false
       }
     case GET_MORE_POSTS:
       return {
         ...state,
         posts: [...state.posts, ...action.payload],
-        latestPost: action.payload[4]
+        latestPost: action.payload[4],
+        loading: false
       }
+    case SET_LOADING: {
+      return {
+        ...state,
+        loading: true
+      }
+    }
     case CLEAR_ALL_POSTS:
       return {
         ...state,

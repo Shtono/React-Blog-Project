@@ -14,6 +14,7 @@ const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [signUpCompleted, setSignUpCompleted] = useState(true);
+  const [authNotification, setAuthNotification] = useState(null);
 
   const signup = async (email, password, username) => {
     setSignUpCompleted(false)
@@ -27,14 +28,15 @@ const AuthContextProvider = (props) => {
       setSignUpCompleted(true);
       history.push('/')
     } catch (err) {
-      console.log(err.message);
+      setDropdown('error', err.message)
     }
   }
 
   const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password)
+      .then((cred) => setDropdown('success', `Welcome back ${cred.user.displayName}`))
   }
-
+  // setDropdown('success', 'Logged out.See you soon ;)')
   const logout = async () => {
     await db.collection('users').doc(auth.currentUser.uid).update({ isActive: false })
     return auth.signOut()
@@ -52,13 +54,22 @@ const AuthContextProvider = (props) => {
     return unsubscribe;
   }, [])
 
+  const setDropdown = (type, message) => {
+    setAuthNotification({ type, message })
+    setTimeout(() => {
+      setAuthNotification(null)
+    }, 3000)
+  }
+
   return (
     <AuthContext.Provider value={{
       currentUser,
       signUpCompleted,
+      authNotification,
       signup,
       login,
       logout,
+      setDropdown
     }}>
       {!loading && props.children}
     </AuthContext.Provider>

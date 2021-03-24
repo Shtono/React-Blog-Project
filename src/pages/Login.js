@@ -4,7 +4,7 @@ import '../styles/login.css';
 import { AuthContext } from '../context/auth/AuthContext';
 
 const Login = () => {
-  const { login } = useContext(AuthContext)
+  const { login, setDropdown } = useContext(AuthContext)
   const [user, setUser] = useState({ email: '', password: '' })
   const { email, password } = user;
   const history = useHistory();
@@ -19,7 +19,7 @@ const Login = () => {
       await login(email, password);
       history.push('/')
     } catch (err) {
-      console.log(err);
+      setDropdown('error', err.message)
     }
   }
 

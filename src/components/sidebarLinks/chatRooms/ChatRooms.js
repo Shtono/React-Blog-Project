@@ -58,11 +58,15 @@ class ChatRooms extends Component {
 
     sendMessage(e) {
         e.preventDefault();
-        db.collection('chatrooms').add({
-            ...this.state.message,
-            createdAt: timestamp()
-        })
-        this.setState({ message: { ...this.state.message, body: '' } })
+        if (this.state.message.body.trim() !== '') {
+            db.collection('chatrooms').add({
+                ...this.state.message,
+                createdAt: timestamp()
+            })
+            this.setState({ message: { ...this.state.message, body: '' } })
+        } else {
+            this.props.setDropdown('error', 'Cannot send an empty messaage')
+        }
     }
 
     dbChatListener(room, callback) {
@@ -81,7 +85,7 @@ class ChatRooms extends Component {
 
     render() {
         const { date, jsRoom, reactRoom, techRoom, socialRoom } = this.state;
-        const { currentUser } = this.context;
+        const { currentUser, setDropdown } = this.context;
         const { displayName } = currentUser;
         return (
             <div style={mainStyle}>
@@ -98,6 +102,7 @@ class ChatRooms extends Component {
                             room='techroom'
                             roomState={techRoom}
                             displayName={displayName}
+                            setDropdown={setDropdown}
                             getChats={this.getTechChats.bind(this)}
                             sendMessage={this.sendMessage}
                             setMessage={this.setMessage}
@@ -109,6 +114,7 @@ class ChatRooms extends Component {
                             room='jsroom'
                             roomState={jsRoom}
                             displayName={displayName}
+                            setDropdown={setDropdown}
                             getChats={this.getJsChats.bind(this)}
                             sendMessage={this.sendMessage}
                             setMessage={this.setMessage}
@@ -120,6 +126,7 @@ class ChatRooms extends Component {
                             room='reactroom'
                             roomState={reactRoom}
                             displayName={displayName}
+                            setDropdown={setDropdown}
                             getChats={this.getReactChats.bind(this)}
                             sendMessage={this.sendMessage}
                             setMessage={this.setMessage}
@@ -131,6 +138,7 @@ class ChatRooms extends Component {
                             room='socialroom'
                             roomState={socialRoom}
                             displayName={displayName}
+                            setDropdown={setDropdown}
                             getChats={this.getSocialChats.bind(this)}
                             sendMessage={this.sendMessage}
                             setMessage={this.setMessage}

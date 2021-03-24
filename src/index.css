@@ -22,6 +22,7 @@ img {
   width: 250px;
   border-radius: 50%;
   border: rgba(195, 195, 195, 0.239) solid 10px;
+  transition: all 0.5s ease-in;
 }
 
 /* Notifications */
@@ -30,7 +31,7 @@ img {
   top: -100px;
   left: 50%;
   width: 250px;
-  height: 75px;
+  min-height: 75px;
   color: #000;
   text-align: center;
   opacity: 0;
@@ -41,14 +42,12 @@ img {
   background-color: green;
   top: 100px;
   transition: all 0.3s ease-out;
-  transition: opacity 1s ease-out;
 }
 .notification.error {
   opacity: 1;
   background-color: red;
   top: 100px;
   transition: all 0.3s ease-out;
-  /* transition: opacity 0.5s ease-out; */
 }
 
 /* Mobile Styling */

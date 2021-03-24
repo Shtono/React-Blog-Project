@@ -9,7 +9,9 @@ import {
   SET_LOADING_TRUE,
   FILTER_USERS,
   GET_SINGLE_USER,
-  CLEAR_SINGLE_USER
+  CLEAR_SINGLE_USER,
+  SET_NOTIFICATION,
+  REMOVE_NOTIFICATION
 } from '../types';
 
 
@@ -23,6 +25,7 @@ const UsersContextProvider = (props) => {
     currentUserInfo: null,
     filteredUsers: null,
     singleUser: null,
+    userNotification: null,
     loading: true
   }
 
@@ -60,14 +63,14 @@ const UsersContextProvider = (props) => {
   const getUserInfo = (id) => {
     db.collection('users').doc(id).get().then(doc => {
       dispatch({ type: GET_CURRENT_USER, payload: doc.data() });
-    }).catch(err => console.log(err.message))
+    }).catch(err => setDropdown('error', err.message))
   }
 
   // Update current user info to DB
   const updateUserInfo = (info) => {
     db.collection('users').doc(currentUser.uid).update(info)
-      .then(console.log(`${currentUser.displayName}'s info was successfily updated`))
-      .catch(err => console.log(err.message))
+      .then(setDropdown('success', 'Profile Successfuly updated'))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Filter users
@@ -79,12 +82,19 @@ const UsersContextProvider = (props) => {
   const getSingleUser = (userId) => {
     db.collection('users').doc(userId).get()
       .then(doc => dispatch({ type: GET_SINGLE_USER, payload: doc.data() }))
-      .catch(err => console.log(err.message))
+      .catch(err => setDropdown('error', err.message))
   }
 
   // Clear Single User
   const clearSingleUser = () => {
     dispatch({ type: CLEAR_SINGLE_USER })
+  }
+
+  const setDropdown = (type, message) => {
+    dispatch({ type: SET_NOTIFICATION, payload: { type, message } })
+    setTimeout(() => {
+      dispatch({ type: REMOVE_NOTIFICATION })
+    }, 3000)
   }
 
   return (
@@ -93,12 +103,14 @@ const UsersContextProvider = (props) => {
       currentUserInfo: state.currentUserInfo,
       filteredUsers: state.filteredUsers,
       singleUser: state.singleUser,
+      userNotification: state.userNotification,
       getUsers,
       getUserInfo,
       updateUserInfo,
       filterUsers,
       getSingleUser,
-      clearSingleUser
+      clearSingleUser,
+      setDropdown
     }}>
       {!state.loading && props.children}
     </UsersContext.Provider>
