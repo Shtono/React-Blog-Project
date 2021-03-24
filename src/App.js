@@ -35,7 +35,7 @@ function App() {
               <UsersContextProvider>
                 <Notification />
                 <Switch>
-                  <PrivateRoute exact path='/' component={Home} />
+                  <Route exact path='/' component={Home} />
                   <PrivateRoute path='/blog' component={Blog} />
                   <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
 

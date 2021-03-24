@@ -4,7 +4,7 @@ import '../styles/login.css';
 import { AuthContext } from '../context/auth/AuthContext';
 
 const Login = () => {
-  const { login, setDropdown } = useContext(AuthContext)
+  const { login, setDropdown, githubLogin } = useContext(AuthContext)
   const [user, setUser] = useState({ email: '', password: '' })
   const { email, password } = user;
   const history = useHistory();
@@ -40,7 +40,8 @@ const Login = () => {
         <p>Or login with</p>
         <div className="alt-login">
           <a href="#"><i className="fab fa-facebook-f "></i>Facebook</a>
-          <a href="#"><i className="fab fa-instagram"></i>Instagram</a>
+          <button type="button" onClick={githubLogin}>Github Login</button>
+          {/* <a href="#"><i className="fab fa-instagram"></i>Instagram</a> */}
         </div>
         <p>Don't have an account? <Link to='/signup'>Signup Now</Link></p>
       </form>

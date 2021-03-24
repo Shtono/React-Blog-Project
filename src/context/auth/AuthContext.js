@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { auth, db } from '../../firebase';
+import firebase from 'firebase/app';
 
 export const AuthContext = createContext();
 
@@ -32,14 +33,37 @@ const AuthContextProvider = (props) => {
     }
   }
 
+  const githubLogin = () => {
+    const provider = new firebase.auth.GithubAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(cred => {
+        if (cred.additionalUserInfo.isNewUser) {
+          const uid = cred.user.uid;
+          const username = cred.additionalUserInfo.username;
+          const imageUrl = cred.user.photoURL;
+          auth.currentUser.updateProfile({ displayName: username })
+          db.collection('users').doc(uid).set({
+            username,
+            imageUrl,
+            isActive: true,
+          })
+        } else {
+          db.collection('users').doc(cred.user.uid).update({ isActive: true })
+        }
+
+      })
+      .then(() => history.push('/'))
+      .catch(err => setDropdown('error', 'Failed to login'))
+  }
+
   const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password)
       .then((cred) => setDropdown('success', `Welcome back ${cred.user.displayName}`))
   }
-  // setDropdown('success', 'Logged out.See you soon ;)')
-  const logout = async () => {
-    await db.collection('users').doc(auth.currentUser.uid).update({ isActive: false })
-    return auth.signOut()
+  const logout = () => {
+    db.collection('users').doc(auth.currentUser.uid).update({ isActive: false })
+    auth.signOut()
+    history.push('/login')
   }
 
   // Authentication state listener
@@ -67,6 +91,7 @@ const AuthContextProvider = (props) => {
       signUpCompleted,
       authNotification,
       signup,
+      githubLogin,
       login,
       logout,
       setDropdown

@@ -3,7 +3,7 @@ import '../styles/signup.css';
 import { AuthContext } from '../context/auth/AuthContext';
 
 const Signup = () => {
-  const { signup } = useContext(AuthContext);
+  const { signup, githubLogin } = useContext(AuthContext);
   const [newUser, setNewUser] = useState({
     username: '',
     email: '',
@@ -77,7 +77,8 @@ const Signup = () => {
         <button type="submit">Sign Up</button>
         <div className="alt-login">
           <a href="#"><i className="fab fa-facebook-f "></i>Facebook</a>
-          <a href="#"><i className="fab fa-instagram"></i>Instagram</a>
+          <button type="button" onClick={githubLogin}>Github Login</button>
+          {/* <a href="#"><i className="fab fa-instagram"></i>Instagram</a> */}
         </div>
       </form>
     </div>

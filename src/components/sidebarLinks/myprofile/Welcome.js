@@ -2,7 +2,7 @@ import unnamed from '../../../assets/img/unnamed.png'
 const Welcome = ({ displayName, email, showUpdate, toggleShowUpload, imageUrl }) => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>Welcome back </h1>
+      <h1>Welcome back</h1>
       <h2>{displayName}</h2>
       <img src={imageUrl || unnamed} alt="User Photo" />
       <h3>Email: {email}</h3>
