@@ -23,4 +23,7 @@ export const FILTER_USERS = 'FILTER_USERS';
 export const GET_SINGLE_USER = 'GET_SINGLE_USER';
 export const CLEAR_SINGLE_USER = 'CLEAR_SINGLE_USER';
 
+// NEWS CONTEXT
+export const GET_ARTICLES = 'GET_ARTICLES';
+
 

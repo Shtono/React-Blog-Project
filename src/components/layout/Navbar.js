@@ -51,7 +51,7 @@ const Navbar = () => {
           <div></div>
         </button>
         <div className='links' onClick={closeBar}>
-          {currentUser && <Link to='/' className="current" onClick={handleCurrentPage}>Home</Link>}
+          <Link to='/' className="current" onClick={handleCurrentPage}>Home</Link>
           {currentUser && <Link to='/blog' onClick={handleCurrentPage}>Blog</Link>}
           {currentUser && <Link to='/about' onClick={handleCurrentPage}>About Us</Link>}
           {currentUser && <Link to='/contact' onClick={handleCurrentPage}>Contact</Link>}

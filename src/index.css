@@ -10,6 +10,7 @@
 a {
   text-decoration: none;
   outline: none;
+  color: #fff;
 }
 
 /* Variables */
@@ -23,6 +24,14 @@ img {
   border-radius: 50%;
   border: rgba(195, 195, 195, 0.239) solid 10px;
   transition: all 0.5s ease-in;
+}
+.article-img {
+  width: 500px;
+  border-radius: 0;
+  border: none;
+  margin-bottom: 25px;
+  /* margin-left: auto; */
+  margin-right: 200px;
 }
 
 /* Notifications */
@@ -88,6 +97,7 @@ body {
   /* background: rgb(74,73,73);
   background: linear-gradient(225deg, rgb(47, 47, 47) 0%, rgba(87,87,106,1) 35%, rgba(0,0,0,0.9) 100%); */
   color: #fff;
+  font-size: 20px;
 }
 .navbar {
   background-color: #000;

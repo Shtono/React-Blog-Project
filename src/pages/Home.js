@@ -1,9 +1,52 @@
 import '../styles/home.css'
+import { useContext } from 'react';
+import SinglePageArticle from '../components/home/SinglePageArticle'
+import { NewsContext } from '../context/news/NewsContext';
 
 const Home = () => {
+  const { articles } = useContext(NewsContext);
+  console.log(articles);
   return (
-    <div>Hello</div>
+    <div className="blog-container">
+      <div className="grid-container">
+        {articles && articles.map(article => (
+          <div key={article.id} style={containerStyle}>
+            <img style={imgStyle} src={article.imageURLMin} alt="Image" />
+            <div style={topLayerStyle}>
+              <p>{article.category}</p>
+              <p>{article.title}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default Home;
+
+const containerStyle = {
+  position: 'relative',
+  width: '300px',
+  height: '200px',
+  overflow: 'hidden'
+}
+const imgStyle = {
+  width: '100%',
+  border: 'none',
+  borderRadius: '0',
+
+}
+const topLayerStyle = {
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  left: '0',
+  bottom: '0',
+  backgroundColor: 'rgba(0,0,0,0.25)',
+  fontSize: '16px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+  paddingBottom: '20px',
+}

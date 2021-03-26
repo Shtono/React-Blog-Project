@@ -15,6 +15,7 @@ const Sidebar = () => {
         <Link to="/users">Find User</Link>
         <Link to="/createPost">Create Post</Link>
         <Link to="/myPosts">My Posts</Link>
+        <Link to="/createarticle">Create Article</Link>
         <Link to="#" onClick={logout}>Log Out</Link>
       </ul>
     </div>
