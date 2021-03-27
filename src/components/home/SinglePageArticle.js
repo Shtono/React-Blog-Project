@@ -1,45 +1,63 @@
-import { useState, useEffect } from 'react';
-import { db } from '../../firebase';
+import { useState, useEffect, useContext } from 'react';
 import format from 'date-fns/format'
+import { NewsContext } from '../../context/news/NewsContext';
+import { PostsContext } from '../../context/posts/PostsContext';
+import Comments from '../blogPost/singlePost/Comments';
+import AddComment from '../blogPost/singlePost/AddComment';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 const SinglePageArticle = ({ match }) => {
     const articleId = match.params.articleId;
-    const [article, setArticle] = useState(null);
+    const { getSingleArticle, singleArticle, singleArticleCleanup } = useContext(NewsContext);
+    const { getPostComments, addComment, postComments, setDropdown } = useContext(PostsContext);
+    const { currentUser } = useContext(AuthContext);
 
     useEffect(() => {
-        db.collection('articles')
-            .doc(articleId)
-            .get()
-            .then(doc => setArticle(doc.data()))
+        getSingleArticle(articleId)
+        return singleArticleCleanup
     }, [])
 
-    const printHtml = (p) => {
+    useEffect(() => {
+        const unsubscribe = getPostComments(articleId);
+        return unsubscribe;
+    }, [])
+
+    const printHtml = (p, i) => {
         switch (Object.keys(p)[0]) {
             case 'h2':
-                return <h2 key={p.h2.slice(1, 10)}>{p.h2}</h2>
+                return <h2 key={i}>{p.h2}</h2>
             case 'h3':
-                return <h3 key={p.h3.slice(1, 10)}>{p.h3}</h3>
+                return <h3 key={i}>{p.h3}</h3>
             case 'p':
-                return <p key={p.p.slice(1, 10)}>{p.p}</p>
+                return <p key={i}>{p.p}</p>
         }
     }
-    return article ? (
-        <div>
-            <h5>{article.category}</h5>
-            <h1>{article.title}</h1>
-            <p>{article.subtitle}</p>
-            <small>By <span>{article.author}</span> on {format(article.createdAt.toDate(), 'PPP')} </small> |
-            <a href="#"> {article.commentsCount} comments</a>
-            <img className="article-img" src={article.imageURL} alt="Image" />
-            {article.body.map(p => (
-                printHtml(p)
-            ))}
 
+    const addCommentProps = {
+        postId: articleId,
+        addComment,
+        postedBy: currentUser.displayName,
+        setDropdown
+    }
+    return singleArticle ? (
+        <div>
+            <h5>{singleArticle.category}</h5>
+            <h1>{singleArticle.title}</h1>
+            <p>{singleArticle.subtitle}</p>
+            <small>By <span>{singleArticle.author}</span> on {format(singleArticle.createdAt.toDate(), 'PPP')} </small> |
+            <a href="#comments"> {postComments && postComments.length} comments</a>
+            <img className="article-img" src={singleArticle.imageURL} alt="Image" />
+            {singleArticle.body.map((p, i) => (
+                printHtml(p, i)
+            ))}
+            {currentUser && <AddComment {...addCommentProps} />}
+            {postComments && <Comments comments={postComments} />}
         </div>
     ) :
         (
             <div>Loading</div>
         )
+
 }
 
 export default SinglePageArticle;

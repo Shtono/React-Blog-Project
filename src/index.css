@@ -87,12 +87,12 @@ img {
 }
 
 body {
-  background-image:url(./assets/img/Card-Background-mod.jpg);
+  /* background-image:url(./assets/img/Card-Background-mod.jpg);
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 
-  /* background-color: #313131; */
+  background-color: #313131;
 
   /* background: rgb(74,73,73);
   background: linear-gradient(225deg, rgb(47, 47, 47) 0%, rgba(87,87,106,1) 35%, rgba(0,0,0,0.9) 100%); */

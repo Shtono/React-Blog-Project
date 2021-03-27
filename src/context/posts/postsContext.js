@@ -34,7 +34,6 @@ const PostsContextProvider = (props) => {
     filtered: null,
     userPosts: null,
     singlePost: null,
-    singlePostComments: null,
     singlePostLikes: null,
     postComments: null,
     postNotification: null
@@ -172,15 +171,11 @@ const PostsContextProvider = (props) => {
       .then(setDropdown('success', 'Comment added'))
       .catch(err => setDropdown('error', err.message))
   }
-  // Increase comment count of post
-  const addToCommentsCount = (postId) => {
-    postsRef.doc(postId).update({ comments: state.singlePostComments + 1 })
-  }
+
   // Increase likes count of post
   const addToLikesCount = (postId) => {
     postsRef.doc(postId).update({
       likes: [...state.singlePostLikes, currentUser.uid],
-      likesCount: state.singlePostLikes.length + 1
     })
       .then(() => setDropdown('success', 'Post liked'))
       .catch(err => setDropdown('error', err.message))
@@ -229,7 +224,6 @@ const PostsContextProvider = (props) => {
       getPostComments,
       isPostLiked,
       addComment,
-      addToCommentsCount,
       addToLikesCount,
       singlePostCleanup,
       realTimeListenerUserPosts,

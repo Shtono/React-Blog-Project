@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { timestamp } from '../../../firebase';
 
-const AddComment = ({ postId, addComment, postedBy, addToCommentsCount, setDropdown }) => {
+const AddComment = ({ postId, addComment, postedBy, setDropdown }) => {
   const [comment, setComment] = useState({ postId, postedBy, body: '' });
   const onChange = (e) => {
     setComment({ ...comment, body: e.target.value })
@@ -11,7 +11,6 @@ const AddComment = ({ postId, addComment, postedBy, addToCommentsCount, setDropd
     if (comment.body !== '') {
       addComment({ ...comment, createdAt: timestamp() })
       setComment({ ...comment, body: '' })
-      addToCommentsCount(postId)
     } else {
       setDropdown('error', 'Cannot send an empty comment')
     }
