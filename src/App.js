@@ -22,7 +22,8 @@ import SingleUserPage from './components/sidebarLinks/searchUsers/SingleUserPage
 import Notification from './components/layout/Notification';
 import AddArticle from './components/home/AddArticle';
 import SinglePageArticle from './components/home/SinglePageArticle';
-import NewsContextProvider from './context/news/NewsContext';
+import PrivateRouteAdmin from './components/privateRoutes/PrivateRouteAdmin';
+// import NewsContextProvider from './context/news/NewsContext';
 
 function App() {
 
@@ -30,39 +31,39 @@ function App() {
     <Router>
       {/* <AuthContextProvider> */}
       {/* <PostsContextProvider> */}
-      <NewsContextProvider>
-        <div className="App">
-          <Navbar />
-          <div className="content">
+      {/* <NewsContextProvider> */}
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          {/* Try to implement a container (if needed)  for CSS*/}
+          <UsersContextProvider>
             <Sidebar />
-            {/* Try to implement a container (if needed)  for CSS*/}
-            <UsersContextProvider>
-              <Notification />
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route path='/news/:articleId' component={SinglePageArticle} />
-                <PrivateRoute path='/blog' component={Blog} />
-                <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
+            <Notification />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/news/:articleId' component={SinglePageArticle} />
+              <PrivateRoute path='/blog' component={Blog} />
+              <PrivateRoute exact path="/posts/:blog_id" component={SinglePost} />
 
-                <PrivateRoute path="/myprofile" component={MyProfile} />
-                <PrivateRoute exact path="/users" component={SeachUsers} />
-                <PrivateRoute path="/users/:userId" component={SingleUserPage} />
-                <PrivateRoute path="/createPost" component={AddPost} />
-                <PrivateRoute path="/myPosts" component={MyPosts} />
-                <PrivateRoute path="/chatrooms" component={ChatRooms} />
+              <PrivateRoute path="/myprofile" component={MyProfile} />
+              <PrivateRoute exact path="/users" component={SeachUsers} />
+              <PrivateRoute path="/users/:userId" component={SingleUserPage} />
+              <PrivateRoute path="/createPost" component={AddPost} />
+              <PrivateRoute path="/myPosts" component={MyPosts} />
+              <PrivateRoute path="/chatrooms" component={ChatRooms} />
 
-                <PrivateRoute path="/createarticle" component={AddArticle} />
+              <PrivateRouteAdmin path="/createarticle" component={AddArticle} />
 
-                <Route path='/login' component={Login} />
-                <Route path='/signup' component={Signup} />
+              <Route path='/login' component={Login} />
+              <Route path='/signup' component={Signup} />
 
-                <Route path='*' component={NoMatch} />
-              </Switch>
-            </UsersContextProvider>
-          </div>
-          <Footer />
+              <Route path='*' component={NoMatch} />
+            </Switch>
+          </UsersContextProvider>
         </div>
-      </NewsContextProvider>
+        <Footer />
+      </div>
+      {/* </NewsContextProvider> */}
       {/* </PostsContextProvider> */}
       {/* </AuthContextProvider> */}
     </Router>

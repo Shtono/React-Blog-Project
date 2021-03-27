@@ -91,7 +91,7 @@ const AuthContextProvider = (props) => {
   const logout = () => {
     db.collection('users').doc(auth.currentUser.uid).update({ isActive: false })
       .then(() => auth.signOut())
-      .then(() => history.push('/login'))
+    // .then(() => history.push('/login'))
   }
 
   // Authentication state listener
