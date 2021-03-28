@@ -9,7 +9,12 @@ export default (state, action) => {
         case GET_ARTICLES:
             return {
                 ...state,
-                articles: action.payload
+                latestArticles: action.payload.filter((art, index) => {
+                    return index < 7 && art
+                }),
+                articles: action.payload.filter((art, index) => {
+                    return index >= 7 && art
+                }),
             }
         case GET_SINGLE_ARTICLE:
             return {

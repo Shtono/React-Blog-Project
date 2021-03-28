@@ -11,6 +11,7 @@ export const NewsContext = createContext();
 const NewsContextProvider = (props) => {
 
     const initialState = {
+        latestArticles: null,
         articles: null,
         singleArticle: null,
         singleArticleComments: null
@@ -47,6 +48,7 @@ const NewsContextProvider = (props) => {
     }
 
     return <NewsContext.Provider value={{
+        latestArticles: state.latestArticles,
         articles: state.articles,
         singleArticle: state.singleArticle,
         singleArticleComments: state.singleArticleComments,

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../context/auth/AuthContext';
+// import gmLogo from '../../assets/GM-Logo.png'
 
 const Navbar = () => {
   const { logout, currentUser } = useContext(AuthContext);
@@ -37,6 +38,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="container">
         <div className="logo">
+          {/* <img style={{ width: '100px' }} src={gmLogo} alt="" /> */}
           <span>G</span>
           <span>a</span>
           <span>r</span>

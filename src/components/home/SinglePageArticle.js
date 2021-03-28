@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import format from 'date-fns/format'
 import { NewsContext } from '../../context/news/NewsContext';
 import { PostsContext } from '../../context/posts/PostsContext';
@@ -36,7 +37,7 @@ const SinglePageArticle = ({ match }) => {
     const addCommentProps = {
         postId: articleId,
         addComment,
-        postedBy: currentUser.displayName,
+        postedBy: currentUser && currentUser.displayName,
         setDropdown
     }
     return singleArticle ? (
@@ -50,7 +51,7 @@ const SinglePageArticle = ({ match }) => {
             {singleArticle.body.map((p, i) => (
                 printHtml(p, i)
             ))}
-            {currentUser && <AddComment {...addCommentProps} />}
+            {currentUser ? <AddComment {...addCommentProps} /> : <Link to="/login">Login to comment</Link>}
             {postComments && <Comments comments={postComments} />}
         </div>
     ) :
