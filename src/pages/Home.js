@@ -8,7 +8,7 @@ import SecondaryNews from '../components/home/SecondaryNews';
 const Home = () => {
   const { latestArticles, articles } = useContext(NewsContext);
   return (
-    <div className="blog-container">
+    <div className="home">
       <NewsGrid articles={latestArticles} />
       <SecondaryNews articles={articles} />
     </div>

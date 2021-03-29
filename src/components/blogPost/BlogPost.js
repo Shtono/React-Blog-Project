@@ -11,9 +11,7 @@ const BlogPost = ({ post, deletePost, setCurrent }) => {
     <div className="home">
       <div className="post">
         <h2>{title}</h2>
-        <br /><br />
         <small>Posted by: {author}</small>
-        <br />
         <p>{body.slice(0, 250)}...</p>
         <Link to={`/posts/${id}`}>Read More..</Link>
         <p>{likes.length || 'no'} likes</p>

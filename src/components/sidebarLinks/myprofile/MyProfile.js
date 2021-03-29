@@ -48,15 +48,9 @@ const MyProfile = () => {
     <div>
       <Welcome {...welcomeProps} />
       <UpdateProfile {...updateProfileProps} />
-      <br /><br /><br /><br /><br /><br />
       {showUpload && <UploadPhoto />}
     </div>
   );
 }
 
 export default MyProfile;
-
-
-{/* <Welcome displayName={displayName} email={email} update={update} toggleShowUpload={toggleShowUpload} imageUrl={imageUrl} /> */ }
-
-{/* <UpdateProfile age={age} company={company} job={job} name={name} website={website} city={city} updateUserInfo={updateUserInfo} showInfo={showInfo} update={update} getUserInfo={getUserInfo} id={currentUser.uid} /> */ }

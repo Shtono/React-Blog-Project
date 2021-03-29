@@ -1,4 +1,4 @@
-import '../../styles/addPost.css'
+// import '../../styles/addPost.css'
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { timestamp } from '../../firebase';

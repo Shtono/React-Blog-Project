@@ -88,7 +88,7 @@ class ChatRooms extends Component {
         const { currentUser, setDropdown } = this.context;
         const { displayName } = currentUser;
         return (
-            <div style={mainStyle}>
+            <div>
                 <div>
                     <h1>{this.state.title}</h1>
                     <h2>{this.state.welcome}</h2>
@@ -152,7 +152,3 @@ class ChatRooms extends Component {
 }
 
 export default ChatRooms;
-
-const mainStyle = {
-    width: '100%'
-}

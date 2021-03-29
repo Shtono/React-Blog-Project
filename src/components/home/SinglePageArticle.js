@@ -1,3 +1,4 @@
+import '../../styles/articles.css'
 import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format'

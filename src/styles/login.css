@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
-:root {
-  --pageFont: 'Ubuntu', sans-serif;
-}
-
 .login {
   font-family: var(--pageFont);
   display: flex;

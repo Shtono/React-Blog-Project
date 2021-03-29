@@ -1,4 +1,4 @@
-import '../styles/blog.css';
+// import '../styles/blog.css';
 import Spinner from '../assets/LoadingSpinner.gif'
 import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
@@ -44,14 +44,9 @@ const Blog = () => {
           <BlogPost key={post.id} post={post} />
         ))}
 
-      {loading && <img style={testStyle} src={Spinner} alt="Loading..." />}
+      {loading && <img src={Spinner} alt="Loading..." />}
     </div>
   );
 }
 
 export default Blog;
-
-const testStyle = {
-  width: '100px',
-  textAlign: 'center'
-}

@@ -1,3 +1,4 @@
+import '../../styles/articles.css'
 import { useState } from 'react';
 import { db, timestamp } from '../../firebase';
 import ArticlePreview from './ArticlePreview';
@@ -6,6 +7,7 @@ import ArticlePreview from './ArticlePreview';
 const AddArticle = () => {
     const [preview, setPreview] = useState(false);
     const [body, setBody] = useState([])
+    const [elementType, setElementType] = useState('p');
     const [article, setArticle] = useState({
         category: '',
         author: '',
@@ -22,6 +24,9 @@ const AddArticle = () => {
 
     const onChange = (e) => {
         setArticle({ ...article, [e.target.name]: e.target.value })
+    }
+    const setType = (e) => {
+        setElementType(e.target.value)
     }
 
     const addField = (e) => {
@@ -54,17 +59,8 @@ const AddArticle = () => {
     }
 
     return (
-        <div className="signup">
-            <form onSubmit={addField}>
-                <select name="elementType">
-                    <option value="p">P</option>
-                    <option value="h2">H2</option>
-                    <option value="h3">H3</option>
-                </select>
-                <textarea id="field"></textarea>
-                <button>Add text</button>
-            </form>
-            <form onSubmit={onSubmit}>
+        <div className="create-article">
+            <form className="article-info" onSubmit={onSubmit}>
                 <label htmlFor="category">Category</label>
                 <select name="category" id="category" onChange={onChange}>
                     <option value="HARWARE">HARWARE</option>
@@ -79,6 +75,16 @@ const AddArticle = () => {
                 <input type="text" placeholder="imageURLMin" name="imageURLMin" value={article.imageURLMin} onChange={onChange} />
 
                 <button>Submit</button>
+            </form>
+            <form className="article-content" onSubmit={addField}>
+                <select name="elementType" value={elementType} onChange={setType}>
+                    <option value="p">P</option>
+                    <option value="h2">H2</option>
+                    <option value="h3">H3</option>
+                    <option value="img">Img</option>
+                </select>
+                <textarea rows="7" id="field"></textarea>
+                <button>Add {elementType}</button>
             </form>
             <button onClick={togglePreview}>Preview</button>
             {preview && <ArticlePreview articleInfo={article} body={body} togglePreview={togglePreview} />}

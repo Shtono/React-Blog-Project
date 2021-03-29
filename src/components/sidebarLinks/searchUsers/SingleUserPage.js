@@ -13,11 +13,9 @@ const SingleUserPage = ({ match }) => {
     }, [])
 
     return singleUser ? (
-        <div style={{ textAlign: 'center' }}>
+        <div>
             <h1>{singleUser.username}</h1>
-            <br /><br />
             <img src={singleUser.imageUrl || unnamed} alt="Photo" />
-            <br /><br /><br />
             <h2>Name: {singleUser.name || 'N/A'}</h2>
             <h2>Age: {singleUser.age}</h2>
             <h2>City: {singleUser.city}</h2>
