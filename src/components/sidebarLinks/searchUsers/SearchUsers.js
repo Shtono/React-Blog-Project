@@ -1,3 +1,4 @@
+import '../../../styles/findUser.css'
 import { useContext, useEffect } from 'react';
 import { UsersContext } from '../../../context/users/UsersContext';
 import FilterUsers from './FilterUsers';
@@ -13,7 +14,7 @@ const SeachUsers = () => {
   }, [])
 
   return (
-    <div>
+    <div className="find-user">
       <FilterUsers filter={filterUsers} />
       {filteredUsers ?
         <UserList users={filteredUsers} />

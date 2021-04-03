@@ -6,9 +6,9 @@ class ChatWindow extends Component {
     render() {
         const { msgArr } = this.props;
         return (
-            <div>
+            <div className="chat-window">
                 {msgArr && msgArr.map(msg => (
-                    <MessageItem key={msg.id} author={msg.author} body={msg.body} createdAt={msg.createdAt} />
+                    <MessageItem key={msg.id} author={msg.author} body={msg.body} createdAt={msg.createdAt} uid={msg.uid} photo={msg.photoUrl} />
                 ))}
             </div>
         )

@@ -1,0 +1,63 @@
+.my-profile {
+    margin-top: 50px;
+    width: var(--pageWidth);
+}
+.my-profile .welcome{
+    max-width: var(--pageWidth);
+    display: flex;
+    justify-content: space-between;
+}
+.my-profile .welcome .info h2 {
+    text-align: start;
+    margin-bottom: 10px;
+}
+.my-profile .welcome .info h3 {
+ margin-bottom: 5px;
+}
+.my-profile .welcome img {
+    width: 400px;
+    height: 400px;
+    justify-self: flex-start;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.my-profile .welcome .info{
+       
+}
+.my-profile .welcome button{
+    display: inline-block;
+    margin: 25px 50px 0 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    background-color: var(--darkColor);
+    color: var(--fontLight);
+}
+.my-profile .welcome .info{
+       
+}
+.my-profile .update-profile{
+    margin-top: 50px;
+    font-size: 25px;
+}
+.my-profile .update-profile form{
+    display: flex;
+    flex-direction: column;
+}
+.my-profile .update-profile form label{
+    font-size: 14px;
+}
+.my-profile .update-profile form input {
+  font-size: 25px;
+  border: none;
+  border-bottom: 1px black dotted;
+  margin-bottom: 5px;
+  outline: none;
+  text-align: center;
+}
+.my-profile .update-photo{
+    
+}

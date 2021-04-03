@@ -17,6 +17,7 @@ const AddPost = () => {
     likes: [],
     likesCount: 0,
     comments: 0,
+    views: 0,
     author: currentUser.displayName,
     uid: currentUser.uid
   })
@@ -42,20 +43,15 @@ const AddPost = () => {
   }
 
   return (
-    <div className='add-post-container'>
-      <div>
-        <form onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="title">Post title</label>
-            <input type="text" name='title' value={post.title} onChange={onChange} />
-          </div>
-          <div>
-            <label htmlFor="body">Post body</label>
-            <textarea rows="5" cols="25" name='body' value={post.body} onChange={onChange} />
-          </div>
-          <input type="submit" value="Add Post" />
-        </form>
-      </div>
+    <div className='add-post'>
+      <h1>Create Post</h1>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="title">Post title</label>
+        <input type="text" name='title' value={post.title} onChange={onChange} />
+        <label htmlFor="body">Post body</label>
+        <textarea name='body' value={post.body} onChange={onChange} />
+        <button>Add Post</button>
+      </form>
     </div>
   );
 }

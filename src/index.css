@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 :root {
+    --pageWidth: 1200px;
+    --fontSizeMain: 20px;
+    --articleBodyWidth: 900px;
     --lightColor: #fff;
     --darkColor: #000000;
     --fontLight: #fff;
     --fontDark: #000000;
-    --pageWidth: 1200px;
-    --fontSizeMain: 20px;
-    --pageFont: 'Ubuntu', sans-serif;
+    --pageFont: 'Merriweather', serif;
 }
 
 a {
@@ -25,6 +26,10 @@ a:visited {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
     font-family: var(--pageFont);
@@ -32,6 +37,41 @@ body {
 
 #root {
     min-height: 100vh;
+}
+
+/* Notification */
+.notification {
+    position: absolute;
+    top: -100px;
+    left: -360px;
+    left: 5px;
+    border-radius: 15px;
+    z-index: 1;
+    padding: 10px 20px;
+    width: fit-content;
+    width: 330px;
+    text-align: center;
+    color: var(--fontLight);
+    transition: all 0.5s ease-in;
+    text-shadow: 5px 5px 25px #000000;
+    opacity: 0;
+}
+.notification img {
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+.notification.success {
+    top: 128px;
+    opacity: 1;
+    /* left: 0; */
+    background: linear-gradient(0deg, rgba(0,255,239,0.8295693277310925) 0%, rgba(77,255,0,1) 31%, rgba(2,247,51,0.4150035014005602) 100%);
+}
+.notification.error {
+    top: 128px;
+    opacity: 1;
+    /* left: 0; */
+    background: linear-gradient(0deg, rgba(255,0,159,0.5662640056022409) 0%, rgba(255,0,0,1) 31%, rgba(247,145,2,0.4150035014005602) 100%);
 }
 
 .App {
@@ -44,14 +84,20 @@ body {
 }
 .App .gm-logo{
    position: absolute;
-   top: 15px;
+   top: 150px;
    width: 300px;
    left: 15px;
+   z-index: -2;
+   display: none;
 }
 
 /* Navbar */
 .navbar,
 .sidebar {
+    position: fixed;
+    background-color: var(--lightColor);
+    z-index: 10;
+    padding: 10px 0;
     margin: 0 auto;
     width: 100%;
 }
@@ -73,20 +119,34 @@ body {
 .navbar .container .links a {
     margin-left: 20px;
 }
+.navbar .container .links .active {
+    border-bottom: var(--darkColor) 2px solid;
+}
 
 /* Sidebar(Secondary navbar) */
+.sidebar {
+    top: 77px;
+    padding: 0;
+    background-color: rgb(75, 75, 75);
+}
 .sidebar ul {
     max-width: var(--pageWidth);
     margin: auto;
     display: flex;
 }
 .sidebar ul a {
-    margin-right: 20px;
+    color:#fff;
+    padding: 10px;
+}
+.sidebar ul .active {
+    background-color: var(--lightColor);
+    color: var(--darkColor);
+    font-weight: bold;
 }
 
 /* Content */
 .content {
-    margin: 0 auto;
+    margin: 135px auto;
     width: var(--pageWidth);
     display: flex;
     flex-direction: column;
@@ -96,13 +156,16 @@ body {
 /* Footer */
 .footer {
     margin-top: auto;
+    padding: 15px 0;
     width: 100%;
+    background-color: rgb(230, 220, 210);
 }
 .footer .container{
     margin: auto;
     width: var(--pageWidth);
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .footer .container .links{
     width: 350px;

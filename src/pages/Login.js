@@ -20,6 +20,25 @@ const Login = () => {
       history.push('/')
     } catch (err) {
       setDropdown('error', err.message)
+    } finally {
+      history.push('/')
+    }
+  }
+
+  const handleGithubLogin = async () => {
+    try {
+      await githubLogin();
+      history.push('/')
+    } catch (err) {
+      setDropdown(err.message)
+    }
+  }
+  const handleFacebookLogin = async () => {
+    try {
+      await facebookLogin();
+      history.push('/')
+    } catch (err) {
+      setDropdown(err.message)
     }
   }
 
@@ -39,10 +58,15 @@ const Login = () => {
         <button type="submit">Login</button>
         <p>Or login with</p>
         <div className="alt-login">
-          {/* <a href="#"><i className="fab fa-facebook-f "></i>Facebook</a> */}
-          <button type="button" onClick={facebookLogin}>Github Login</button>
-          <button type="button" onClick={githubLogin}>Github Login</button>
-          {/* <a href="#"><i className="fab fa-instagram"></i>Instagram</a> */}
+
+          <button type="button" onClick={handleFacebookLogin}>
+            <i className="fab fa-facebook-f "></i>
+            Facebook</button>
+
+          <button type="button" onClick={handleGithubLogin}>
+            <i className="fab fa-github "></i>
+            Github</button>
+
         </div>
         <p>Don't have an account? <Link to='/signup'>Signup Now</Link></p>
       </form>

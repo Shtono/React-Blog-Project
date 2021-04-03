@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useContext, createContext } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import postReducer from './postsReducer';
-import { db } from '../../firebase';
+import { db, fieldValue } from '../../firebase';
 import {
   GET_POSTS,
   GET_MORE_POSTS,
@@ -104,12 +104,18 @@ const PostsContextProvider = (props) => {
     db.collection('posts').add(post)
       .then(setDropdown('success', 'Post Added ;)'))
       .catch(err => setDropdown('error', err.message))
+    db.collection('users').doc(currentUser.uid).update({
+      posts: fieldValue.increment(1)
+    })
   }
 
   // Delete post
   const deletePost = async (id) => {
     try {
       await db.collection('posts').doc(id).delete();
+      db.collection('users').doc(currentUser.uid).update({
+        posts: fieldValue.increment(-1)
+      })
       setDropdown('success', 'Post deleted')
     } catch (err) {
       setDropdown('error', err.message)
@@ -170,20 +176,29 @@ const PostsContextProvider = (props) => {
     db.collection('comments').add(comment)
       .then(setDropdown('success', 'Comment added'))
       .catch(err => setDropdown('error', err.message))
+    db.collection('users').doc(currentUser.uid).update({
+      comments: fieldValue.increment(1)
+    })
   }
 
   // Increase likes count of post
   const addToLikesCount = (postId) => {
     postsRef.doc(postId).update({
-      likes: [...state.singlePostLikes, currentUser.uid],
+      likes: fieldValue.arrayUnion(currentUser.uid),
+      likesCount: fieldValue.increment(1)
     })
+      .then(() => getSinglePost(postId))
       .then(() => setDropdown('success', 'Post liked'))
       .catch(err => setDropdown('error', err.message))
   }
 
   // Check if current user has liked the post
   const isPostLiked = () => {
-    return state.singlePostLikes.includes(currentUser.uid) ? true : false
+    return state.singlePostLikes.includes(currentUser.uid) ? true : false;
+  }
+
+  const addPostView = (id) => {
+    db.collection('posts').doc(id).update({ views: fieldValue.increment(1) })
   }
 
   // Single post cleanup
@@ -225,6 +240,7 @@ const PostsContextProvider = (props) => {
       isPostLiked,
       addComment,
       addToLikesCount,
+      addPostView,
       singlePostCleanup,
       realTimeListenerUserPosts,
       setDropdown

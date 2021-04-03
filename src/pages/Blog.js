@@ -1,4 +1,4 @@
-// import '../styles/blog.css';
+import '../styles/blog.css';
 import Spinner from '../assets/LoadingSpinner.gif'
 import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
@@ -29,22 +29,24 @@ const Blog = () => {
   }
 
   return (
-    <div className="blog-container" onScroll={onScroll}>
+    <div className="blog" onScroll={onScroll}>
       <FilterPosts />
 
-      {current && <UpdatePost {...updatePostProps} />}
+      {/* {current && <UpdatePost {...updatePostProps} />} */}
 
-      {(posts && !filtered) &&
-        posts.map((post) => (
-          <BlogPost key={post.id} post={post} />
-        ))}
+      <div className="posts-container">
+        {(posts && !filtered) &&
+          posts.map((post) => (
+            <BlogPost key={post.id} post={post} />
+          ))}
 
-      {filtered &&
-        filtered.map((post) => (
-          <BlogPost key={post.id} post={post} />
-        ))}
+        {filtered &&
+          filtered.map((post) => (
+            <BlogPost key={post.id} post={post} />
+          ))}
+      </div>
 
-      {loading && <img src={Spinner} alt="Loading..." />}
+      {loading && <img className="spinner" src={Spinner} alt="Loading..." />}
     </div>
   );
 }

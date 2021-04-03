@@ -13,8 +13,8 @@ const FilterPosts = () => {
   }
 
   return (
-    <form>
-      <label>Search user Posts</label>
+    <form className="search-posts">
+      <label>Search Posts by Title</label>
       <input type="text" onChange={onChange} />
     </form>
   );

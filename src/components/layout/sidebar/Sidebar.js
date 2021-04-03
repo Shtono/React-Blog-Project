@@ -1,7 +1,7 @@
 // import '../../../styles/sidebar.css';
 import { AuthContext } from '../../../context/auth/AuthContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { UsersContext } from '../../../context/users/UsersContext';
 
 const Sidebar = () => {
@@ -13,12 +13,12 @@ const Sidebar = () => {
   return currentUser ? (
     <div className="sidebar">
       <ul>
-        <Link to="/myprofile">My Profile</Link>
-        <Link to="/chatrooms">Chat Rooms</Link>
-        <Link to="/users">Find User</Link>
-        <Link to="/createPost">Create Post</Link>
-        <Link to="/myPosts">My Posts</Link>
-        {(currentUserInfo && currentUserInfo.isAdmin) && <Link to="/createarticle">Create Article</Link>}
+        <NavLink to="/myprofile">My Profile</NavLink>
+        <NavLink to="/chatrooms">Chat Rooms</NavLink>
+        <NavLink to="/users">Find User</NavLink>
+        <NavLink to="/createPost">Create Post</NavLink>
+        <NavLink to="/myPosts">My Posts</NavLink>
+        {(currentUserInfo && currentUserInfo.isAdmin) && <NavLink to="/createarticle">Create Article</NavLink>}
         <Link to="#" onClick={logout}>Log Out</Link>
       </ul>
     </div>

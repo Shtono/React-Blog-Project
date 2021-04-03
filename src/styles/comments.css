@@ -1,0 +1,51 @@
+.comments {
+    margin-top: 50px;
+}
+.comments form {
+margin-bottom: 25px;
+}
+.comments form input[type=text] {
+    border: none;
+    border-bottom: var(--darkColor) solid 1px;
+    padding: 8px;
+    outline: none;
+    font-size: 20px;
+    width: 750px;
+
+}
+.comments form input[type=text]:focus {
+    border-bottom: var(--darkColor) solid 2px;
+}
+.comments form input[type=submit] {
+    margin-left: 25px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--darkColor);
+    color: var(--lightColor);
+}
+.comments #comments-container {
+    max-width: var(--articleBodyWidth);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.comments #comments-container .comment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: solid black 1px;
+    padding-bottom: 5px;
+}
+.comments #comments-container .comment-item span {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.comments #comments-container .comment-item p {
+    font-size: 20px;
+}
+.comments #comments-container .comment-item small {
+    align-self: flex-end;
+}

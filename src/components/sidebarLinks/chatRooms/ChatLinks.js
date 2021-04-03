@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ChatLinks = () => {
     return (
-        <div>
-            <Link to="/chatrooms/tech">Tech</Link>
-            <Link to="/chatrooms/JS">JavaScript</Link>
-            <Link to="/chatrooms/react">React</Link>
-            <Link to="/chatrooms/social">Social</Link>
+        <div className="chat-rooms-navbar">
+            <NavLink to="/chatrooms/tech">Tech</NavLink>
+            <NavLink to="/chatrooms/JS">JavaScript</NavLink>
+            <NavLink to="/chatrooms/react">React</NavLink>
+            <NavLink to="/chatrooms/social">Social</NavLink>
         </div>
     );
 }

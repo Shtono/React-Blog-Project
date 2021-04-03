@@ -4,13 +4,13 @@ class SendMessage extends Component {
     render() {
         const { submit, value, onChange } = this.props;
         return (
-            <form onSubmit={submit}>
+            <form className="send-message" onSubmit={submit}>
                 <input type="text"
                     placeholder="Write your message..."
                     value={value}
                     onChange={onChange}
                 />
-                <input type="submit" value="Send" />
+                <button>Send</button>
             </form>
         )
     }

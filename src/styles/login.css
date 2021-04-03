@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  grid-column: 4/6;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .login form {
@@ -13,11 +13,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0,0,0,0.5);
+  
 }
 
 .login form h1 {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 }
 
 .login form .input {
@@ -88,31 +88,33 @@ input:-webkit-autofill {
 }
 
 .alt-login {
- margin: 25px 0;
+ margin: 0 0 25px 0;
  width: 100%;
  display: flex;
  justify-content: space-between;
+ gap: 15px;
+}
+.alt-login button {
+width: fit-content;
+padding: 10px 30px 10px 20px;
+}
+.alt-login button i {
+margin-right: 25px;
 }
 
-.alt-login a {
-  color: #fff;
-  width: 49%;
-  text-align: center;
-  font-size: 1.3em;
-  padding: 1em 1em;
-  display: flex;
-  justify-content: space-evenly;
-  border-radius: 10px;
-}
-.alt-login a:first-of-type {
+.alt-login button:first-of-type {
 background-color: #4267B2;
+color: var(--fontLight);
 }
-.alt-login a:last-of-type {
-background-color: #E1306C;
+.alt-login button:last-of-type {
+background-color: var(--darkColor);
+color: var(--lightColor);
 }
 
 .login form p:last-of-type :first-child {
   color: #6c9dff;
+  font-weight: bold;
+  letter-spacing: 1.1px;
 }
 
 @media screen and (min-width: 500px) {
@@ -122,7 +124,7 @@ background-color: #E1306C;
   }
   .login form {
     background: rgba(0,0,0,0.1);
-    padding: 75px 37.5px;
+    padding: 50px 37.5px;
     box-shadow: 15px 15px 10px rgb(0, 0, 0);
   }
 }

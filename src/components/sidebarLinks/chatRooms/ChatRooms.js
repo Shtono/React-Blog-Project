@@ -1,3 +1,4 @@
+import '../../../styles/chatrooms.css'
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth/AuthContext';
@@ -16,28 +17,11 @@ class ChatRooms extends Component {
             reactRoom: null,
             jsRoom: null,
             socialRoom: null,
-            date: new Date(),
             welcome: 'Welcome to our Chatrooms.Down bellow You can find different categoies to choose from.Have fun! :)',
             title: 'Allright Gang!!!'
         }
     }
     static contextType = AuthContext;
-
-    componentDidMount() {
-        this.timerID = setInterval(() => {
-            this.tick()
-        }, 1000)
-        console.log('componentDidMount Ran...');
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID)
-        console.log('componentWillUnmount Ran...');
-    }
-
-    tick() {
-        this.setState({ date: new Date() })
-    }
 
     getTechChats(chats) {
         this.setState({ techRoom: chats })
@@ -84,16 +68,14 @@ class ChatRooms extends Component {
 
 
     render() {
-        const { date, jsRoom, reactRoom, techRoom, socialRoom } = this.state;
+        const { jsRoom, reactRoom, techRoom, socialRoom } = this.state;
         const { currentUser, setDropdown } = this.context;
-        const { displayName } = currentUser;
+        const { displayName, uid } = currentUser;
         return (
-            <div>
-                <div>
-                    <h1>{this.state.title}</h1>
+            <div className="chat-rooms">
+                <div className="info">
+                    {/* <h1>{this.state.title}</h1> */}
                     <h2>{this.state.welcome}</h2>
-                    <br />
-                    <p>Time: {this.state.date.toLocaleTimeString()}</p>
                 </div>
                 <ChatLinks />
                 <Switch>
@@ -102,6 +84,7 @@ class ChatRooms extends Component {
                             room='techroom'
                             roomState={techRoom}
                             displayName={displayName}
+                            uid={uid}
                             setDropdown={setDropdown}
                             getChats={this.getTechChats.bind(this)}
                             sendMessage={this.sendMessage}
@@ -114,6 +97,7 @@ class ChatRooms extends Component {
                             room='jsroom'
                             roomState={jsRoom}
                             displayName={displayName}
+                            uid={uid}
                             setDropdown={setDropdown}
                             getChats={this.getJsChats.bind(this)}
                             sendMessage={this.sendMessage}
@@ -126,6 +110,7 @@ class ChatRooms extends Component {
                             room='reactroom'
                             roomState={reactRoom}
                             displayName={displayName}
+                            uid={uid}
                             setDropdown={setDropdown}
                             getChats={this.getReactChats.bind(this)}
                             sendMessage={this.sendMessage}
@@ -138,6 +123,7 @@ class ChatRooms extends Component {
                             room='socialroom'
                             roomState={socialRoom}
                             displayName={displayName}
+                            uid={uid}
                             setDropdown={setDropdown}
                             getChats={this.getSocialChats.bind(this)}
                             sendMessage={this.sendMessage}

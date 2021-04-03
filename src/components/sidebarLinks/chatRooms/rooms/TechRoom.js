@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { UsersContext } from '../../../../context/users/UsersContext';
 import ChatWindow from '../ChatWindow';
 import SendMessage from '../SendMessage';
 
@@ -10,27 +11,28 @@ class TechRoom extends Component {
             message: {
                 body: '',
                 room: this.props.room,
-                author: this.props.displayName
+                author: this.props.displayName,
+                uid: this.props.uid
             }
         }
     }
-
+    static contextType = UsersContext;
     componentDidMount() {
         this.setState({
-            unsubscribe: this.props.listener(this.props.room, this.props.getChats)
+            unsubscribe: this.props.listener(this.props.room, this.props.getChats),
+            message: { ...this.state.message, photoUrl: this.context.currentUserInfo.imageUrl }
         })
     }
 
     componentWillUnmount() {
         this.state.unsubscribe();
-        console.log(`${this.props.room} unmounted`);
     }
 
     render() {
         const { roomState, sendMessage, setMessage } = this.props;
         const { message } = this.state;
         return (
-            <div>
+            <div className="room">
                 <ChatWindow msgArr={roomState} />
                 <SendMessage
                     submit={sendMessage.bind(this)}

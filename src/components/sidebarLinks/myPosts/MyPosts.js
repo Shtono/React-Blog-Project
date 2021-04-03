@@ -1,3 +1,4 @@
+import '../../../styles/blog.css'
 import { useContext, useEffect } from 'react';
 import BlogPost from "../../blogPost/BlogPost";
 import { PostsContext } from '../../../context/posts/PostsContext';
@@ -12,17 +13,19 @@ const MyPosts = () => {
   }, [])
 
   return (
-    <div className="blog-container">
+    <div className="blog">
 
       {current && <UpdatePost current={current} clearCurrent={clearCurrent} updatePost={updatePost} />
       }
 
-      { userPosts && userPosts.map(post => (
-        <BlogPost key={post.id} postId={post.id} userId={post.author} title={post.title} body={post.body} post={post} deletePost={deletePost} setCurrent={setCurrent} />
-      ))
-      }
+      <div className="posts-container">
+        {userPosts && userPosts.map(post => (
+          <BlogPost key={post.id} postId={post.id} userId={post.author} title={post.title} body={post.body} post={post} deletePost={deletePost} setCurrent={setCurrent} />
+        ))
+        }
+      </div>
 
-    </div>
+    </div >
   );
 }
 

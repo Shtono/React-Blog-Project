@@ -3,10 +3,9 @@ import UserItem from './UserItem';
 export default function UserList({ users }) {
   return (
     users ?
-      <div>
-        <h2>Users:</h2>
+      <div className="user-list">
         {users.map(user => (
-          <UserItem key={user.id} userId={user.id} name={user.username} isActive={user.isActive} />
+          <UserItem key={user.id} user={user} />
         ))}
 
       </div>

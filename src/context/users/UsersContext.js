@@ -69,7 +69,7 @@ const UsersContextProvider = (props) => {
   // Update current user info to DB
   const updateUserInfo = (info) => {
     db.collection('users').doc(currentUser.uid).update(info)
-      .then(setDropdown('success', 'Profile Successfuly updated'))
+      .then(setDropdown('success', 'Profile Updated'))
       .catch(err => setDropdown('error', err.message))
   }
 

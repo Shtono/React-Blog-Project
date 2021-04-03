@@ -3,8 +3,8 @@ const FilterUsers = ({ filter }) => {
     filter(e.target.value)
   }
   return (
-    <div>
-      <input type="text" onChange={handleChange} />
+    <div className="filter-users">
+      <input type="text" placeholder="Type to search" onChange={handleChange} />
     </div>
   );
 }

@@ -1,11 +1,23 @@
 import { Link } from 'react-router-dom';
 
-const UserItem = ({ name, isActive, userId }) => {
+const UserItem = ({ user }) => {
+  const { username, id, isActive, imageUrl, age, city, company } = user;
+
+  // userId={user.id} name={user.username} isActive={user.isActive}
   return (
-    <div>
-      <div style={isActive ? statusStyleOn : statusStyleOff}></div>
-      <h3>{name}</h3>
-      <Link to={`/users/${userId}`}>View</Link>
+    <div className="user-item">
+      <div className="more-info">
+        <p>Age: {age}</p>
+        <p>From: {city}</p>
+        <p>Works at: {company}</p>
+        <p>Status:
+           <span className={isActive ? 'status-on' : 'status-off'}>{isActive ? 'Online' : 'Offline'}</span>
+        </p>
+      </div>
+      <img src={imageUrl} alt="User photo" />
+      {/* <div className="status" style={isActive ? statusStyleOn : statusStyleOff}></div> */}
+      <h3>{username}</h3>
+      <Link to={`/users/${id}`}>View Profile</Link>
     </div>
   )
 }

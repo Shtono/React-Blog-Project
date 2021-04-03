@@ -1,1 +1,275 @@
+.blog {
+    position: relative;
+    width: var(--pageWidth);
+    height: 1000px;
+    overflow: scroll;
+    margin-top: 50px;
+}
+.blog .spinner {
+    display: block;
+    margin: auto;
+    width: 150px;
+}
+.blog .search-posts{
+    width: var(--articleBodyWidth);
+    margin: auto auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.blog .search-posts label{
+    font-size: 20px;
+}
+.blog .search-posts input{
+    width: 50%;
+    padding-bottom: 5px;
+    border: none;
+    border-bottom: var(--darkColor) solid 1px;
+    outline: none;
+    text-align: center;
+    font-size: 20px;
 
+}
+.blog .posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.post {
+    width: var(--pageWidth);
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(230, 220, 210);
+    gap: 10px;
+    padding: 25px;
+    border-radius: 5px;
+}
+.post h2 {
+    font-size: 30px;
+}
+.post small {
+    font-weight: bold;
+}
+.post p {
+}
+.post a {
+    align-self: flex-end;
+    font-size: 20px;
+}
+.post a:hover {
+    color: blue;
+}
+.post a i {
+    margin-right: 5px;
+}
+.post .likes {
+    font-size: 25px;
+    width: 45px;
+    height: 32px;
+    transform: scale(1.3);
+}
+.post .likes i {
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.post .btn-post,
+.blog .update-post button {
+    font-size: 25px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+.post .btn-delete,
+.blog .update-post button[type=button] {
+    background-color: rgb(255, 8, 8);
+    color: #fff;
+}
+.post .btn-update,
+.blog .update-post button[type=submit] {
+    background-color: rgb(33, 8, 255);
+    color: #fff;
+    margin-left: 25px;
+}
+
+
+/* Update-Post */
+.blog .update-post {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1;
+    animation: drop 0.5s ease-in;
+}
+@keyframes drop {
+    from {
+        top: -825px;
+        background-color: transparent;
+    }
+    to {
+        top: 150px;
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+}
+
+.blog .update-post form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 15px auto;
+    font-size: 16px;
+    color: var(--fontLight);
+}
+.blog .update-post form input,
+.blog .update-post form textarea{
+   border: none;
+   outline: none;
+   padding: 10px;
+   font-size: 20px;
+   margin: 7px 0 15px 0;
+}
+.blog .update-post div {
+   display: flex;
+   justify-content: space-between;
+   padding: 0 25px;
+}
+.blog .update-post button [type=submit] {
+    background-color: blue;
+}
+.blog .update-post button[type=button] {
+}
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0); 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(243, 98, 31);
+    border-radius: 30px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(233, 96, 33); 
+  }
+
+
+
+  /* Single Post */
+
+  .single-post {
+    
+  }
+  .single-post .flex-container {
+    display: flex;
+    width: var(--pageWidth);
+    padding: 25px;
+  }
+  .single-post .flex-container .post-info {
+      align-self: center;
+      height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+  }
+  .single-post .flex-container .post-info i {
+    font-size: 25px;
+  }
+  .single-post .flex-container .post-info button {
+    font-size: 20px;
+    padding: 5px 20px;
+    border: none;
+    outline: none;
+    background-color: var(--darkColor);
+    color: var(--fontLight);
+  }
+  .single-post .flex-container .post-info p {
+     color: blue;
+     font-weight: bold;
+    font-size: 20px;
+    padding: 5px 20px;
+  }
+  .single-post .flex-container .post-body {
+      margin-left: 50px;
+      font-size: 20px;
+  }
+  .single-post .flex-container .post-body h2 {
+  margin-bottom: 25px;
+  }
+  .single-post .flex-container .post-body small{
+    font-size: 16px;
+  }
+  .single-post .flex-container .post-body small span{
+    font-weight: bold;
+  }
+  .single-post .flex-container .post-body p {
+    margin-top: 15px;
+    text-align: justify;
+    line-height: 1.5;
+  }
+
+
+  /* Create Post / Add Post */
+  .add-post {
+      width: var(--pageWidth);
+      margin-top: 50px;
+  }
+  .add-post h1 {
+      text-align: center;
+      font-size: 50px;
+  }
+  .add-post form {
+      width: 85%;
+      margin: auto;
+      padding: 30px;
+ 
+      display: flex;
+      flex-direction: column;
+  }
+  .add-post form label {
+
+  }
+  .add-post form input {
+      margin-bottom: 35px;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding-bottom: 5px;
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: black solid 2px;
+  }
+  .add-post form textarea {
+      width: 100%;
+      height: 225px;
+      margin: 15px auto 25px auto;
+      font-size: 25px;
+      padding: 15px;
+  }
+  .add-post form button {
+      width: fit-content;
+      margin: auto;
+      padding: 10px 20px;
+      background-color: var(--darkColor);
+      color: var(--fontLight);
+      font-weight: bold;
+      font-size: 25px;
+  }

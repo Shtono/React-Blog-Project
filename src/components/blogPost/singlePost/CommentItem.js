@@ -4,8 +4,8 @@ const CommentItem = ({ postedBy, body, createdAt }) => {
   const timeAgo = createdAt ? formatDistanceToNow(createdAt.toDate()) : '';
 
   return (
-    <div>
-      <small>{postedBy}</small>
+    <div className="comment-item">
+      <span>{postedBy}</span>
       <p>{body}</p>
       <small>{timeAgo} ago</small>
     </div>

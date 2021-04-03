@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { auth, db } from '../../firebase';
+import { useHistory } from 'react-router';
+import { auth, db, timestamp } from '../../firebase';
 import firebase from 'firebase/app';
 
 export const AuthContext = createContext();
@@ -25,10 +25,11 @@ const AuthContextProvider = (props) => {
       await auth.currentUser.updateProfile({ displayName: username })
       await db.collection('users').doc(auth.currentUser.uid).set({
         username: auth.currentUser.displayName,
-        isActive: true
+        isActive: true,
+        regDate: timestamp()
       })
       setSignUpCompleted(true);
-      history.push('/')
+      // history.push('/')
     } catch (err) {
       setDropdown('error', err.message)
     }
@@ -37,7 +38,7 @@ const AuthContextProvider = (props) => {
   // Github login
   const githubLogin = () => {
     const provider = new firebase.auth.GithubAuthProvider();
-    auth.signInWithPopup(provider)
+    return auth.signInWithPopup(provider)
       .then(cred => {
         if (cred.additionalUserInfo.isNewUser) {
           const uid = cred.user.uid;
@@ -48,20 +49,18 @@ const AuthContextProvider = (props) => {
             username,
             imageUrl,
             isActive: true,
+            regDate: timestamp()
           })
         } else {
           db.collection('users').doc(cred.user.uid).update({ isActive: true })
         }
-
       })
-      .then(() => history.push('/'))
-      .catch(err => setDropdown('error', 'Failed to login'))
   }
 
   // Facebook login
   const facebookLogin = () => {
     const provider = new firebase.auth.FacebookAuthProvider()
-    auth.signInWithPopup(provider)
+    return auth.signInWithPopup(provider)
       .then(cred => {
         if (cred.additionalUserInfo.isNewUser) {
           const uid = cred.user.uid;
@@ -71,15 +70,13 @@ const AuthContextProvider = (props) => {
           db.collection('users').doc(uid).set({
             username,
             name,
-            isActive: true
+            isActive: true,
+            regDate: timestamp()
           })
         } else {
           db.collection('users').doc(cred.user.uid).update({ isActive: true })
         }
       })
-      .then(() => history.push('/'))
-      .catch(err => setDropdown('error', 'Failed to login'))
-
   }
 
   // Login with email and password

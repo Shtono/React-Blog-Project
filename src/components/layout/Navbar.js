@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from '../../context/auth/AuthContext';
 // import gmLogo from '../../assets/GM-Logo.png'
 
@@ -12,18 +12,18 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="container">
-        <div className="logo">
+        <Link to="/" className="logo">
           Garage
           <span>2021</span>
-        </div>
+        </Link>
         <div className='links'>
-          <Link to='/' className="current">Home</Link>
-          {currentUser && <Link to='/blog'>Blog</Link>}
-          {currentUser && <Link to='/about'>About Us</Link>}
-          {currentUser && <Link to='/contact'>Contact</Link>}
-          {currentUser && <Link to='/login' onClick={signout}>Log Out</Link>}
-          {!currentUser && <Link to='/login'>Login</Link>}
-          {!currentUser && <Link to='/signup'>Sign up</Link>}
+          <NavLink to='/'>Home</NavLink>
+          {currentUser && <NavLink to='/blog'>Blog</NavLink>}
+          {currentUser && <NavLink to='/about'>About Us</NavLink>}
+          {currentUser && <NavLink to='/contact'>Contact</NavLink>}
+          {currentUser && <NavLink to='/login' onClick={signout}>Log Out</NavLink>}
+          {!currentUser && <NavLink to='/login'>Login</NavLink>}
+          {!currentUser && <NavLink to='/signup'>Sign up</NavLink>}
         </div>
       </div>
 

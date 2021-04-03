@@ -22,7 +22,7 @@ const UploadPhoto = () => {
         }
     }
     return (
-        <form>
+        <form className="update-photo">
             <label>
                 <input type="file" onChange={handleChange} />
                 <span>+</span>

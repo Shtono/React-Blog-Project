@@ -1,9 +1,11 @@
 import '../styles/signup.css';
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../context/auth/AuthContext';
 
 const Signup = () => {
-  const { signup, githubLogin, facebookLogin } = useContext(AuthContext);
+  const history = useHistory();
+  const { setDropdown, signup, githubLogin, facebookLogin } = useContext(AuthContext);
   const [newUser, setNewUser] = useState({
     username: '',
     email: '',
@@ -36,11 +38,29 @@ const Signup = () => {
       signup(email, password, username)
       e.target.password2.classList.remove('correct')
       e.target.password2.classList.remove('incorrect')
+
     } else {
       console.log('try again');
     }
-
   }
+
+  const handleGithubLogin = async () => {
+    try {
+      await githubLogin();
+      history.push('/')
+    } catch (err) {
+      setDropdown(err.message)
+    }
+  }
+  const handleFacebookLogin = async () => {
+    try {
+      await facebookLogin();
+      history.push('/')
+    } catch (err) {
+      setDropdown(err.message)
+    }
+  }
+
 
   return (
     <div className="signup">
@@ -75,11 +95,17 @@ const Signup = () => {
           onChange={handlePassword}
           required />
         <button type="submit">Sign Up</button>
+        <p>Or login with</p>
         <div className="alt-login">
-          {/* <a href="#"><i className="fab fa-facebook-f "></i>Facebook</a> */}
-          <button type="button" onClick={githubLogin}>Github Login</button>
-          <button type="button" onClick={facebookLogin}>Facebook Login</button>
-          {/* <a href="#"><i className="fab fa-instagram"></i>Instagram</a> */}
+
+          <button type="button" onClick={handleFacebookLogin}>
+            <i className="fab fa-facebook-f "></i>
+            Facebook</button>
+
+          <button type="button" onClick={handleGithubLogin}>
+            <i className="fab fa-github "></i>
+            Github</button>
+
         </div>
       </form>
     </div>

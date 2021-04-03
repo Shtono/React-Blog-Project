@@ -1,0 +1,115 @@
+.chat-rooms {
+    /* background-color: rgb(219, 219, 219); */
+}
+.chat-rooms .info{
+text-align: center;
+padding: 10px;
+}
+.chat-rooms .chat-rooms-navbar {
+    display: flex;
+    justify-content: space-between;
+}
+.chat-rooms .chat-rooms-navbar a {
+    flex: 1 1 100%;
+    padding: 10px 20px;
+    background-color: #4b4b4b;
+    color: var(--fontLight);
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.chat-rooms .chat-rooms-navbar .active {
+    background-color: rgb(230, 220, 210);
+    color: var(--darkColor);
+}
+.chat-rooms .room {
+    background-color: rgb(230, 220, 210);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.chat-rooms .room .chat-window {
+    overflow: scroll;
+    padding: 15px 0;
+    width: 100%;
+    height: 550px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+
+/* Message-Item */
+.chat-rooms .message-item {
+    padding: 5px 20px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    animation: message 0.5s ease-in;
+}
+@keyframes message {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+.chat-rooms .message-item h5 {
+    align-self: flex-end;
+}
+.chat-rooms .message-item p {
+    margin-top: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.chat-rooms .message-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.chat-rooms .message-item p span{
+    font-size: 18px;
+    background-color: rgb(209, 208, 208);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.chat-rooms .message-item small{
+    font-size: 10px;
+    text-align: end;
+}
+
+.chat-rooms .message-item.user{
+    align-self: flex-end;
+}
+.chat-rooms .message-item.user p{
+    flex-direction: row-reverse;
+}
+.chat-rooms .message-item.user small{
+    text-align: start;
+}
+
+
+/* Send Message */
+.chat-rooms .send-message {
+    
+}
+.chat-rooms .send-message input {
+    width: 90%;
+    font-size: 25px;
+    padding: 10px 20px;
+    /* border: none; */
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(250, 250, 250);
+}
+.chat-rooms .send-message button {
+    width: 10%;
+    font-size: 25px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--darkColor);
+    color: var(--fontLight);
+
+}

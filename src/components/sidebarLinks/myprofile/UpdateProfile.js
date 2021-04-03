@@ -20,7 +20,6 @@ const UpdateProfile = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     props.updateUserInfo(userInfo);
-    console.log(userInfo);
     getUserInfo(id)
     showUpdate()
   }
@@ -28,30 +27,36 @@ const UpdateProfile = (props) => {
   return props.showInfo ? (
     <div className="update-profile">
       <form onSubmit={onSubmit}>
+        <label htmlFor="name">Name</label>
         <input type="text" placeholder="Name"
           name="name"
           value={name}
           onChange={onChange}
         />
+        <label htmlFor="age">Age</label>
         <input type="text" placeholder="Age"
           name="age"
           value={age}
           onChange={onChange}
         />
+        <label htmlFor="city">City</label>
         <input type="text" placeholder="City"
           name="city"
           value={city}
           onChange={onChange} />
+        <label htmlFor="job">Job</label>
         <input type="text" placeholder="Job"
           name="job"
           value={job}
           onChange={onChange}
         />
+        <label htmlFor="company">Company</label>
         <input type="text" placeholder="Company"
           name="company"
           value={company}
           onChange={onChange}
         />
+        <label htmlFor="website">Website</label>
         <input type="text" placeholder="Website"
           name="website"
           value={website}
@@ -63,13 +68,14 @@ const UpdateProfile = (props) => {
         </div>
       </form>
     </div>
-  ) : (<div>
-    <h2>Name: {name}</h2>
-    <h2>Age: {age}</h2>
-    <h2>City: {city}</h2>
-    <h2>Job: {job}</h2>
-    <h2>Company: {company}</h2>
-    <h2>Website: {website}</h2>
+  ) : (<div className="update-profile">
+    <h4>Personal Info</h4>
+    <p>Name: {name}</p>
+    <p>Age: {age}</p>
+    <p>City: {city}</p>
+    <p>Job: {job}</p>
+    <p>Company: {company}</p>
+    <p>Website: {website}</p>
 
   </div>)
 }

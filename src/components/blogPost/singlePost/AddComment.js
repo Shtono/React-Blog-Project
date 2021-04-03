@@ -1,3 +1,4 @@
+import '../../../styles/comments.css'
 import { useState } from 'react';
 import { timestamp } from '../../../firebase';
 

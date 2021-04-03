@@ -22,7 +22,7 @@ const ArticlePreview = ({ articleInfo, body, togglePreview }) => {
                     <h1>{article.title}</h1>
                     <p>{article.subtitle}</p>
                     <small>By <span>{article.author}</span> on Date </small>
-                    <a href="#"> {article.commentsCount} comments</a>
+                    {/* <a href="#"> {article.commentsCount} comments</a> */}
                 </div>
             </div>
             <button onClick={togglePreview}>Close</button>
