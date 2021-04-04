@@ -4,7 +4,7 @@
     Shtono Kuzmanov
 ### Status
     Done
-### RectJS version
+### ReactJS version
     17.0.1
 
 ## Technologies used 
