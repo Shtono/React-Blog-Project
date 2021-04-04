@@ -1,5 +1,12 @@
 # Garage Tech - SoftUni ReactJS - March 2021 - Project
 
+### Author
+    Shtono Kuzmanov
+### Status
+    Done
+### RectJS version
+    17.0.1
+
 ## Technologies used 
 * ReactJS
 * Context-api with reducers
