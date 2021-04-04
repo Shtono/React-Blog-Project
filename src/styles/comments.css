@@ -32,20 +32,40 @@ margin-bottom: 25px;
     gap: 20px;
 }
 .comments #comments-container .comment-item {
+    height: fit-content;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     border-bottom: solid black 1px;
     padding-bottom: 5px;
+    gap: 15px;
 }
-.comments #comments-container .comment-item span {
+.comments #comments-container .comment-item .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.comments #comments-container .comment-item .info img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.comments #comments-container .comment-item .info span {
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: bold;
 }
-.comments #comments-container .comment-item p {
-    font-size: 20px;
+.comments #comments-container .comment-item .comment-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 129px;
+    justify-content: space-between;
 }
-.comments #comments-container .comment-item small {
+.comments #comments-container .comment-item .comment-body p {
+    font-size: 20px;
+    text-align: justify;
+}
+.comments #comments-container .comment-item .comment-body small {
     align-self: flex-end;
 }

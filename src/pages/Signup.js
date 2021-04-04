@@ -6,6 +6,7 @@ import { AuthContext } from '../context/auth/AuthContext';
 const Signup = () => {
   const history = useHistory();
   const { setDropdown, signup, githubLogin, facebookLogin } = useContext(AuthContext);
+  const [passConfirmClassName, setPassConfirmClassName] = useState('')
   const [newUser, setNewUser] = useState({
     username: '',
     email: '',
@@ -23,11 +24,9 @@ const Signup = () => {
   const handlePassword = (e) => {
     setNewUser({ ...newUser, password2: e.target.value })
     if (e.target.value !== password) {
-      e.target.classList.remove('correct');
-      e.target.classList.add('incorrect');
+      setPassConfirmClassName('incorrect')
     } else {
-      e.target.classList.remove('incorrect');
-      e.target.classList.add('correct');
+      setPassConfirmClassName('correct')
     }
   }
 
@@ -36,11 +35,11 @@ const Signup = () => {
     e.preventDefault()
     if (password === password2) {
       signup(email, password, username)
-      e.target.password2.classList.remove('correct')
-      e.target.password2.classList.remove('incorrect')
-
+        .then(() => {
+          history.push('/')
+        })
     } else {
-      console.log('try again');
+      setDropdown('error', 'Passwords do not match')
     }
   }
 
@@ -89,6 +88,7 @@ const Signup = () => {
           onChange={onChange}
         />
         <input type="password"
+          className={passConfirmClassName}
           name="password2"
           placeholder="Repeat password"
           value={password2}

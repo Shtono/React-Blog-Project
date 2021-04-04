@@ -51,8 +51,6 @@
 .post small {
     font-weight: bold;
 }
-.post p {
-}
 .post a {
     align-self: flex-end;
     font-size: 20px;
@@ -141,8 +139,6 @@
 .blog .update-post button [type=submit] {
     background-color: blue;
 }
-.blog .update-post button[type=button] {
-}
 
 
 
@@ -172,10 +168,6 @@
 
 
   /* Single Post */
-
-  .single-post {
-    
-  }
   .single-post .flex-container {
     display: flex;
     width: var(--pageWidth);
@@ -242,9 +234,6 @@
  
       display: flex;
       flex-direction: column;
-  }
-  .add-post form label {
-
   }
   .add-post form input {
       margin-bottom: 35px;

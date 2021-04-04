@@ -22,6 +22,7 @@ import AddArticle from './components/home/AddArticle';
 import Sidebar from './components/layout/sidebar/Sidebar';
 // import './styles/scrollBar.css'
 import Logo from './assets/GM-Logo.png'
+import About from './pages/About';
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
               <PrivateRoute path="/chatrooms" component={ChatRooms} />
 
               <PrivateRouteAdmin path="/createarticle" component={AddArticle} />
+
+              <Route path='/about' component={About} />
 
               <Route path='/login' component={Login} />
               <Route path='/signup' component={Signup} />

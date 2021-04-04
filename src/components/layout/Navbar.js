@@ -20,7 +20,7 @@ const Navbar = () => {
           <NavLink to='/'>Home</NavLink>
           {currentUser && <NavLink to='/blog'>Blog</NavLink>}
           {currentUser && <NavLink to='/about'>About Us</NavLink>}
-          {currentUser && <NavLink to='/contact'>Contact</NavLink>}
+          {/* {currentUser && <NavLink to='/contact'>Contact</NavLink>} */}
           {currentUser && <NavLink to='/login' onClick={signout}>Log Out</NavLink>}
           {!currentUser && <NavLink to='/login'>Login</NavLink>}
           {!currentUser && <NavLink to='/signup'>Sign up</NavLink>}

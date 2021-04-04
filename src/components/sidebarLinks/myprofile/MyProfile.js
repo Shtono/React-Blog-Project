@@ -1,6 +1,5 @@
 import '../../../styles/myProfile.css'
-import Welcome from "./Welcome"
-import UpdateProfile from "./UpdateProfile"
+import Welcome from "./Welcome";
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth/AuthContext';
 import { UsersContext } from '../../../context/users/UsersContext';
@@ -50,18 +49,9 @@ const MyProfile = () => {
   return (
     <div className="my-profile">
       <Welcome {...welcomeProps} updateProfile={updateProfileProps} />
-      {/* <UpdateProfile {...updateProfileProps} /> */}
-      {showUpload && <UploadPhoto />}
+      {showUpload && <UploadPhoto toggleShowUpload={toggleShowUpload} />}
     </div>
   );
 }
 
 export default MyProfile;
-
-// return (
-//   <div className="my-profile">
-//     <Welcome {...welcomeProps} />
-//     <UpdateProfile {...updateProfileProps} />
-//     {showUpload && <UploadPhoto />}
-//   </div>
-// );

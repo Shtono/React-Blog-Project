@@ -5,7 +5,6 @@ const Welcome = ({ displayName, email, showUpdate, toggleShowUpload, imageUrl, u
   return (
     <div className="welcome">
       <div className="info">
-        {/* <h1>Welcome back</h1> */}
         <h2>{displayName}</h2>
         <h3>Email: {email}</h3>
         <h3>Member since: {format(regDate.toDate(), 'PPP')}</h3>

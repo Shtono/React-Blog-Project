@@ -28,12 +28,26 @@ const AuthContextProvider = (props) => {
         isActive: true,
         regDate: timestamp()
       })
-      setSignUpCompleted(true);
-      // history.push('/')
+      return setSignUpCompleted(true);
     } catch (err) {
       setDropdown('error', err.message)
     }
   }
+  // const signup = async (email, password, username) => {
+  //   setSignUpCompleted(false)
+  //   try {
+  //     await auth.createUserWithEmailAndPassword(email, password)
+  //     await auth.currentUser.updateProfile({ displayName: username })
+  //     await db.collection('users').doc(auth.currentUser.uid).set({
+  //       username: auth.currentUser.displayName,
+  //       isActive: true,
+  //       regDate: timestamp()
+  //     })
+  //     setSignUpCompleted(true);
+  //   } catch (err) {
+  //     setDropdown('error', err.message)
+  //   }
+  // }
 
   // Github login
   const githubLogin = () => {
@@ -95,7 +109,11 @@ const AuthContextProvider = (props) => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
       if (user) {
-        db.collection('users').doc(auth.currentUser.uid).update({ isActive: true })
+        db.collection('users')
+          .doc(auth.currentUser.uid)
+          .update({ isActive: true })
+          // An error comes when an user registers for the first time as there is no document in DB to update
+          .catch(err => console.log('Ignore this Error:' + err.message))
       }
       setLoading(false);
     })

@@ -21,9 +21,6 @@
     border-radius: 50%;
     object-fit: cover;
 }
-.my-profile .welcome .info{
-       
-}
 .my-profile .welcome button{
     display: inline-block;
     margin: 25px 50px 0 0;
@@ -35,9 +32,6 @@
     font-weight: bold;
     background-color: var(--darkColor);
     color: var(--fontLight);
-}
-.my-profile .welcome .info{
-       
 }
 .my-profile .update-profile{
     margin-top: 50px;
@@ -58,6 +52,35 @@
   outline: none;
   text-align: center;
 }
+.my-profile .update-profile form .btn-red {
+    background-color: rgb(200, 0, 0);
+}
+.my-profile .update-profile form .btn-green {
+    background-color: rgb(0, 175, 0);
+}
 .my-profile .update-photo{
-    
+    position: relative;
+}
+.my-profile .update-photo .error {
+    font-weight: bold;
+    color: red;
+}
+.my-profile .update-photo label {
+    margin-left: 400px;
+}
+.my-profile .update-photo label input[type=file] {
+    display: none;
+}
+.my-profile .update-photo label span i {
+    padding: 15px 20px;
+    background-color: rgb(12, 131, 1);
+    border-radius: 50%;
+    color: rgb(0, 255, 0);
+}
+.my-profile .update-photo .progress-bar {
+    margin-top: 25px;
+    background-color: rgb(0, 225, 0);
+    height: 20px;
+    border-radius: 10px;
+    transition: width 0.2s ease-in;
 }

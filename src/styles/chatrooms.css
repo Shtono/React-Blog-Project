@@ -1,6 +1,4 @@
-.chat-rooms {
-    /* background-color: rgb(219, 219, 219); */
-}
+
 .chat-rooms .info{
 text-align: center;
 padding: 10px;
@@ -52,7 +50,7 @@ padding: 10px;
     to {opacity: 1}
 }
 .chat-rooms .message-item h5 {
-    align-self: flex-end;
+    align-self: flex-start;
 }
 .chat-rooms .message-item p {
     margin-top: 3px;
@@ -82,6 +80,9 @@ padding: 10px;
 .chat-rooms .message-item.user{
     align-self: flex-end;
 }
+.chat-rooms .message-item.user h5 {
+    align-self: flex-end;
+}
 .chat-rooms .message-item.user p{
     flex-direction: row-reverse;
 }
@@ -91,9 +92,6 @@ padding: 10px;
 
 
 /* Send Message */
-.chat-rooms .send-message {
-    
-}
 .chat-rooms .send-message input {
     width: 90%;
     font-size: 25px;

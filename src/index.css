@@ -41,7 +41,7 @@ body {
 
 /* Notification */
 .notification {
-    position: absolute;
+    position: fixed;
     top: -100px;
     left: -360px;
     left: 5px;
@@ -96,7 +96,7 @@ body {
 .sidebar {
     position: fixed;
     background-color: var(--lightColor);
-    z-index: 10;
+    z-index: 100;
     padding: 10px 0;
     margin: 0 auto;
     width: 100%;
@@ -171,4 +171,16 @@ body {
     width: 350px;
     display: flex;
     justify-content: space-between;
+}
+.footer .container .links a i {
+  font-size: 48px;
+}
+.footer .container .links a .fa-youtube {
+  color: #FF0000;
+}
+.footer .container .links a .fa-facebook {
+  color: #4267B2;
+}
+.footer .container .links a .fa-linkedin {
+  color: #2867B2;
 }

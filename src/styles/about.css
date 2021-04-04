@@ -1,0 +1,89 @@
+.about {
+   background-color: rgb(138, 138, 138);
+   width: 100vw;
+}
+.about .main-image{
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    background-image: url('../assets/img/about-backgroung.jpg') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.about .main-image::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.479);
+  z-index: 1;
+
+}
+.about .main-image h1 {
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 75px;
+    z-index: 10;
+}
+.about .main-image h2 {
+    position: absolute;
+    left: 50px;
+    bottom: 250px;
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    z-index: 10;
+}
+
+.about .info {
+    background: linear-gradient(0deg, rgba(230,220,210,0.969625350140056) 0%, rgba(2,1,32,0.9500175070028011) 80%);
+    padding-top: 75px;
+
+}
+.about .info h2{
+    font-size: 35px;
+  color: #fff;
+}
+.about .info h3{
+    color: #fff;
+    text-align: center;
+    margin: 75px auto;
+}
+.about .info .our-team {
+    padding-bottom: 100px;
+    width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px;
+}
+.about .info .our-team div {
+
+}
+.about .info .our-team div img{
+width: 200px;
+height: 200px;
+object-fit: cover;
+border-radius: 50%;
+}
+.about .info .our-team div h3{
+    margin: 15px;
+    font-size: 25px;
+    color: #fff;
+}
+.about .info .our-team div h4{
+    margin: 15px 0;
+}
+.about .info .our-team div p{
+    text-align: left;
+    line-height: 1.5;
+    font-size: 20px;
+    padding: 5px;
+}

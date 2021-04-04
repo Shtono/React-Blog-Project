@@ -1,9 +1,12 @@
 import '../../../styles/comments.css'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { timestamp } from '../../../firebase';
+import { UsersContext } from '../../../context/users/UsersContext'
 
 const AddComment = ({ postId, addComment, postedBy, setDropdown }) => {
-  const [comment, setComment] = useState({ postId, postedBy, body: '' });
+  const { currentUserInfo } = useContext(UsersContext)
+  const { imageUrl } = currentUserInfo;
+  const [comment, setComment] = useState({ postId, postedBy, imageUrl, body: '' });
   const onChange = (e) => {
     setComment({ ...comment, body: e.target.value })
   }
